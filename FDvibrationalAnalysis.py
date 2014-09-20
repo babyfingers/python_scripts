@@ -20,7 +20,7 @@ useBook = True#Whether to use book or Gaussian website to construct
 #If we are using the book, the following two aren't necessary.
 rotXIndicesSwitch1 = True
 rotXIndicesSwitch2 = False
-mySystem = 2
+mySystem = 3
 
 if (mySystem==0):
     inputDirectory = "p_fdh2o-test01"
@@ -33,10 +33,15 @@ elif (mySystem==1):
     refFileName = inputDirectory+"/_"+baseFileName+".out"
     freqFileName = "benzene-freq-STO3G.out01"
 elif (mySystem==2):
+    inputDirectory = "p_fdacet-test02"
+    baseFileName = "fdacet"
+    refFileName = inputDirectory+"/_"+baseFileName+".out"
+    freqFileName = "acetaldehyde-freq-STO3G.out01"
+elif (mySystem==3):
     inputDirectory = "p_fdforce-venus"
     baseFileName = "fdforcXD"
     refFileName = inputDirectory+"/reference.o"
-    freqFileName = None
+    freqFileName = "OLD_mock_qchem_output.out"
 
 hh = 0.0001 #Finite difference step size
 
@@ -93,7 +98,9 @@ muZ = 2
 NCoord = 3*NAtom
 NMode = NCoord -NExternal
 NAstringLen = max(len(str(NAtom)),2)
-grad_re = re.compile("    [123]   [- ][0-9]\.[0-9]{14}   [- ][0-9]\.[0-9]{14}   [- ][0-9]\.[0-9]{14}")
+grad1_re = re.compile("    [123]   [- ][0-9]\.[0-9]{14}$",re.MULTILINE)
+grad2_re = re.compile("    [123]   [- ][0-9]\.[0-9]{14}   [- ][0-9]\.[0-9]{14}$",re.MULTILINE)
+grad3_re = re.compile("    [123]   [- ][0-9]\.[0-9]{14}   [- ][0-9]\.[0-9]{14}   [- ][0-9]\.[0-9]{14}$",re.MULTILINE)
 fourt_re  = re.compile("[- ][0-9]\.[0-9]{14}")
 atom_re = re.compile("[a-zA-Z]{1,2}\s+[-]?[0-9]+\.[0-9]{10}\s+[-]?[0-9]+\.[0-9]{10}\s+[-]?[0-9]+\.[0-9]{10}")
 ele_re = re.compile("[a-zA-Z]{1,2}")
@@ -113,21 +120,35 @@ for atomI in range(NAtom):
             myFile = open(myFileName,"r")
             myFileS = myFile.read()
             myFile.close()
-            iGradList = grad_re.findall(myFileS)
-            assert(len(iGradList)==NAtom)
-            for iii in range(NAtom/3):
-                fGradList = fourt_re.findall(iGradList[iii*3 +muX])
-                fGradList = fGradList +fourt_re.findall(iGradList[iii*3 +muY])
-                fGradList = fGradList +fourt_re.findall(iGradList[iii*3 +muZ])
-                for jjj in range(3):
+            iGradList1 = grad1_re.findall(myFileS)
+            iGradList2 = grad2_re.findall(myFileS)
+            iGradList3 = grad3_re.findall(myFileS)
+            assert(len(iGradList3)+2*len(iGradList2)/3+len(iGradList1)/3==NAtom)
+            atomsLeft = NAtom
+            for iii in range((NAtom+2)/3):
+                NCol = min(3,atomsLeft)
+                if (NCol==3):
+                    fGradList = fourt_re.findall(iGradList3[iii*3 +muX])
+                    fGradList = fGradList +fourt_re.findall(iGradList3[iii*3 +muY])
+                    fGradList = fGradList +fourt_re.findall(iGradList3[iii*3 +muZ])
+                elif (NCol==2):
+                    fGradList = fourt_re.findall(iGradList2[muX])
+                    fGradList = fGradList +fourt_re.findall(iGradList2[muY])
+                    fGradList = fGradList +fourt_re.findall(iGradList2[muZ])
+                elif (NCol==1):
+                    fGradList = fourt_re.findall(iGradList1[muX])
+                    fGradList = fGradList +fourt_re.findall(iGradList1[muY])
+                    fGradList = fGradList +fourt_re.findall(iGradList1[muZ])
+                for jjj in range(NCol):
                     if (PorMS=="p"):
-                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muX] = float(fGradList[jjj])   #X
-                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muY] = float(fGradList[jjj +3])#Y
-                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muZ] = float(fGradList[jjj +6])#Z
+                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muX] = float(fGradList[jjj +muX*NCol])
+                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muY] = float(fGradList[jjj +muY*NCol])
+                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muZ] = float(fGradList[jjj +muZ*NCol])
                     elif (PorMS=="m"):
-                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muX] = FCmat[atomI*3 +muI,iii*9 +jjj*3 +muX] -float(fGradList[jjj +muX*3])
-                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muY] = FCmat[atomI*3 +muI,iii*9 +jjj*3 +muY] -float(fGradList[jjj +muY*3])
-                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muZ] = FCmat[atomI*3 +muI,iii*9 +jjj*3 +muZ] -float(fGradList[jjj +muZ*3])
+                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muX] = FCmat[atomI*3 +muI,iii*9 +jjj*3 +muX] -float(fGradList[jjj +muX*NCol])
+                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muY] = FCmat[atomI*3 +muI,iii*9 +jjj*3 +muY] -float(fGradList[jjj +muY*NCol])
+                        FCmat[atomI*3 +muI,iii*9 +jjj*3 +muZ] = FCmat[atomI*3 +muI,iii*9 +jjj*3 +muZ] -float(fGradList[jjj +muZ*NCol])
+                atomsLeft -= NCol
 
 qc.symmetryTest(FCmat,True)
 
@@ -252,7 +273,7 @@ redMass = np.zeros(NMode)
 for iii in range(NMode):
     redMass[iii] = 1.0/np.dot(cartModes[:,iii],cartModes[:,iii])
 #print "redMass: ",redMass
-
+cartModes = qc.normalize(cartModes)
 #Get force constants in mDyn/A
 FCk = [math.pow(myFreq*qc.SOL*TPI/qc.cm_to_m,2)*myMass*qc.amu_to_kg*math.pow(10,-2) for myFreq,myMass in zip(freqV,redMass)]
 #print "FCk: ",FCk
@@ -288,7 +309,8 @@ if (freqFileName):
     myBlockIndices = qc.getVibBlockLocations(freqF, NMode)
     anlFreq, anlRedMass, anlFC = qc.getAllScalarVibQuantities(freqF,myBlockIndices,NAtom,NMode)
     logFile.write("\nRMS absolute error\n")
-    logFile.write("Frequency:      {: f}\n".format(math.sqrt(((freqV-anlFreq)**2).mean())))
+    freqError = math.sqrt(((freqV-anlFreq)**2).mean()))
+    logFile.write("Frequency:      {: f}\n".format(freqError)
     logFile.write("Reduced mass:   {: f}\n".format(math.sqrt(((redMass-anlRedMass)**2).mean())))
     logFile.write("Force constant: {: f}\n\n".format(math.sqrt(((FCk-anlFC)**2).mean())))
     logFile.write("RMS relative error\n")

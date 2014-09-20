@@ -1,0 +1,367 @@
+#sq.py
+#!/usr/local/bin/python
+import os.path
+import sys
+import time
+import math
+import re
+
+# 2012-01-20: found an error in a <2|2> overlap
+# calculation while testing the Q-Chem code,
+# and traced it back to the master string delta
+# function expression here. Went back and double-
+# checked all of the master terms except <3|3>
+# (too long, and so I just checked the final
+# product by hand, although I may need to
+# return to this to check it if I want to use
+# this for anything beyond SF-XCIS that involves
+# triply-excited states.
+
+# 2011-12-07: master terms complete for the
+# following overlap pairs: <1|1>, <1|2>,  <1|3>,
+# <2|2>, <2|3>, <3|3>. Made minor fixes to style
+# and made it so a summation symbol is not
+# included if there are no indices over which to
+# sum. Now prints to a file ("sf-xcis.tex"),
+# and running the script "sfxcis.py" should
+# run this script with all possible overlaps
+# for SF-XCIS.
+
+# 2011-12-06: LaTeX formatting is complete. To
+# indicate a beta orbital, use a capital letter
+# in the index. This will be converted to a
+# lowercase index with a bar over it in the
+# output. Any numerals will be converted to
+# subtext, but they will not be included in any
+# summation lists because it will be assumed
+# that they are specific orbitals (i.e., s_{1}).
+
+# 2011-12-05: as of the current version of this
+# code, only expressions for operators between
+# single-single, single-double, double-double,
+# and double-triple excitations can be handled.
+# To expand this list, a new master expression
+# must be written, and the occ_lst and vrt_lst
+# lists must be modified.
+
+# sq.py: Program to automate some of this second
+# quantization stuff. Hopefully we wlil be able
+# to input a series of characters and get out a
+# situation-specific set of delta functions (and
+# maybe ultimately a proper set of coefficients
+# and operators.)
+
+#Index groups
+occ_lsta = ['i','j','k','l','m','n']
+vrt_lsta = ['a','b','c','d','e','f']
+occ_lstb = ['I','J','K','L','M','N']
+vrt_lstb = ['A','B','C','D','E','F']
+wld_lst = ['r','s']
+#Regular expressions
+#Recognize a full term composed of delta functions
+trm_re = re.compile("[+\-]D\([a-zA-Z0-9()]*")
+#Recognize a single delta function
+dlt_re = re.compile("D\([a-zA-Z0-9]+\)\([a-zA-Z0-9]+\)")
+#Extract an index from that delta function
+ind_re = re.compile("\([a-zA-Z0-9]+\)")
+#Capital letter
+cp_re = re.compile("[A-Z]")
+#Numeral
+nt_re = re.compile("[0-9]+")
+#Master strings for delta function expressions
+s11 = "+D(r)(s)D<a><b>D<i><j> -D<a><b>D<i>(s)D<j>(r) +D<i><j>D<a>(r)D<b>(s)"
+t11 = "t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}"
+s12 = "+D<a><b>D<c>(s)D<i><k>D<j>(r) -D<a><b>D<c>(s)D<i><j>D<k>(r) -D<a><c>D<b>(s)D<i><k>D<j>(r) +D<a><c>D<b>(s)D<i><j>D<k>(r)"
+t12 = "t_{<i>}^{I<a>}X_{<r><s>}t_{<j><k>}^{J<b><c>}"
+s13 = "0"
+t13 = "t_{<i>}^{I<a>}X_{<r><s>}t_{<j><k><l>}^{J<b><c><d>}"
+s22 = "+D<i><k>D<j><l>D<b>(r)D<a><c>D<d>(s) -D<i><k>D<j><l>D<b>(r)D<a><d>D<c>(s) -D<i><k>D<j><l>D<a>(r)D<b><c>D<d>(s) +D<i><k>D<j><l>D<a>(r)D<b><d>D<c>(s) " \
+    + "-D<i><l>D<j><k>D<b>(r)D<a><c>D<d>(s) +D<i><l>D<j><k>D<b>(r)D<a><d>D<c>(s) +D<i><l>D<j><k>D<a>(r)D<b><c>D<d>(s) -D<i><l>D<j><k>D<a>(r)D<b><d>D<c>(s) " \
+    + "+D<a><c>D<b><d>D<i><k>D<j><l>D(r)(s) -D<a><c>D<b><d>D<i><l>D<j><k>D(r)(s) -D<a><c>D<b><d>D<i><k>D<j>(s)D<l>(r) +D<a><c>D<b><d>D<i>(s)D<j><k>D<l>(r) " \
+    + "+D<a><c>D<b><d>D<i><l>D<j>(s)D<k>(r) -D<a><c>D<b><d>D<i>(s)D<j><l>D<k>(r) -D<a><d>D<b><c>D<i><k>D<j><l>D(r)(s) +D<a><d>D<b><c>D<i><l>D<j><k>D(r)(s) " \
+    + "+D<a><d>D<b><c>D<i><k>D<j>(s)D<l>(r) -D<a><d>D<b><c>D<i>(s)D<j><k>D<l>(r) -D<a><d>D<b><c>D<i><l>D<j>(s)D<k>(r) +D<a><d>D<b><c>D<i>(s)D<j><l>D<k>(r)"
+t22 = "t_{<i><j>}^{I<a><b>}X_{<r><s>}t_{<k><l>}^{J<c><d>}"
+s23 = "+D<a><d>D<b><e>D<c>(s)D<i><l>D<j><m>D<k>(r) -D<a><d>D<b><e>D<c>(s)D<i><m>D<j><l>D<k>(r) -D<a><e>D<b><d>D<c>(s)D<i><l>D<j><m>D<k>(r) +D<a><e>D<b><d>D<c>(s)D<i><m>D<j><l>D<k>(r) " \
+    + "+D<a><d>D<b><e>D<c>(s)D<i><m>D<j><k>D<l>(r) -D<a><d>D<b><e>D<c>(s)D<i><k>D<j><m>D<l>(r) -D<a><e>D<b><d>D<c>(s)D<i><m>D<j><k>D<l>(r) +D<a><e>D<b><d>D<c>(s)D<i><k>D<j><m>D<l>(r) " \
+    + "+D<a><d>D<b><e>D<c>(s)D<i><k>D<j><l>D<m>(r) -D<a><d>D<b><e>D<c>(s)D<i><l>D<j><k>D<m>(r) -D<a><e>D<b><d>D<c>(s)D<i><k>D<j><l>D<m>(r) +D<a><e>D<b><d>D<c>(s)D<i><l>D<j><k>D<m>(r) " \
+    + "+D<a><e>D<b><c>D<d>(s)D<i><l>D<j><m>D<k>(r) -D<a><e>D<b><c>D<d>(s)D<i><m>D<j><l>D<k>(r) -D<a><c>D<b><e>D<d>(s)D<i><l>D<j><m>D<k>(r) +D<a><c>D<b><e>D<d>(s)D<i><m>D<j><l>D<k>(r) " \
+    + "+D<a><e>D<b><c>D<d>(s)D<i><m>D<j><k>D<l>(r) -D<a><e>D<b><c>D<d>(s)D<i><k>D<j><m>D<l>(r) -D<a><c>D<b><e>D<d>(s)D<i><m>D<j><k>D<l>(r) +D<a><c>D<b><e>D<d>(s)D<i><k>D<j><m>D<l>(r) " \
+    + "+D<a><e>D<b><c>D<d>(s)D<i><k>D<j><l>D<m>(r) -D<a><e>D<b><c>D<d>(s)D<i><l>D<j><k>D<m>(r) -D<a><c>D<b><e>D<d>(s)D<i><k>D<j><l>D<m>(r) +D<a><c>D<b><e>D<d>(s)D<i><l>D<j><k>D<m>(r) " \
+    + "+D<a><c>D<b><d>D<e>(s)D<i><l>D<j><m>D<k>(r) -D<a><c>D<b><d>D<e>(s)D<i><m>D<j><l>D<k>(r) -D<a><d>D<b><c>D<e>(s)D<i><l>D<j><m>D<k>(r) +D<a><d>D<b><c>D<e>(s)D<i><m>D<j><l>D<k>(r) " \
+    + "+D<a><c>D<b><d>D<e>(s)D<i><m>D<j><k>D<l>(r) -D<a><c>D<b><d>D<e>(s)D<i><k>D<j><m>D<l>(r) -D<a><d>D<b><c>D<e>(s)D<i><m>D<j><k>D<l>(r) +D<a><d>D<b><c>D<e>(s)D<i><k>D<j><m>D<l>(r) " \
+    + "+D<a><c>D<b><d>D<e>(s)D<i><k>D<j><l>D<m>(r) -D<a><c>D<b><d>D<e>(s)D<i><l>D<j><k>D<m>(r) -D<a><d>D<b><c>D<e>(s)D<i><k>D<j><l>D<m>(r) +D<a><d>D<b><c>D<e>(s)D<i><l>D<j><k>D<m>(r)"
+t23 = "t_{<i><j>}^{I<a><b>}X_{<r><s>}t_{<k><l><m>}^{J<c><d><e>}"
+s33 = "+D<a><d>D<b><e>D<c><f>D<i><n>D<j><l>D<k><m>D(r)(s) -D<a><d>D<b><e>D<c><f>D<i><n>D<j><m>D<k><l>D(r)(s) -D<a><d>D<b><e>D<c><f>D<i><m>D<j><l>D<k><n>D(r)(s) +D<a><d>D<b><e>D<c><f>D<i><m>D<j><n>D<k><l>D(r)(s) +D<a><d>D<b><e>D<c><f>D<i><l>D<j><m>D<k><n>D(r)(s) -D<a><d>D<b><e>D<c><f>D<i><l>D<j><n>D<k><m>D(r)(s) -D<a><d>D<b><e>D<c><f>D<i>(s)D<j><l>D<k><m>D<n>(r) +D<a><d>D<b><e>D<c><f>D<i>(s)D<j><m>D<k><l>D<n>(r) +D<a><d>D<b><e>D<c><f>D<i><m>D<j><l>D<k>(s)D<n>(r) -D<a><d>D<b><e>D<c><f>D<i><m>D<j>(s)D<k><l>D<n>(r) -D<a><d>D<b><e>D<c><f>D<i><l>D<j><m>D<k>(s)D<n>(r) +D<a><d>D<b><e>D<c><f>D<i><l>D<j>(s)D<k><m>D<n>(r) +D<a><d>D<b><e>D<c><f>D<i>(s)D<j><l>D<k><n>D<m>(r) -D<a><d>D<b><e>D<c><f>D<i>(s)D<j><n>D<k><l>D<m>(r) -D<a><d>D<b><e>D<c><f>D<i><n>D<j><l>D<k>(s)D<m>(r) +D<a><d>D<b><e>D<c><f>D<i><n>D<j>(s)D<k><l>D<m>(r) +D<a><d>D<b><e>D<c><f>D<i><l>D<j><n>D<k>(s)D<m>(r) -D<a><d>D<b><e>D<c><f>D<i><l>D<j>(s)D<k><n>D<m>(r) -D<a><d>D<b><e>D<c><f>D<i>(s)D<j><m>D<k><n>D<l>(r) +D<a><d>D<b><e>D<c><f>D<i>(s)D<j><n>D<k><m>D<l>(r) +D<a><d>D<b><e>D<c><f>D<i><n>D<j><m>D<k>(s)D<l>(r) -D<a><d>D<b><e>D<c><f>D<i><n>D<j>(s)D<k><m>D<l>(r) -D<a><d>D<b><e>D<c><f>D<i><m>D<j><n>D<k>(s)D<l>(r) +D<a><d>D<b><e>D<c><f>D<i><m>D<j>(s)D<k><n>D<l>(r) -D<a><d>D<b><f>D<c><e>D<i><n>D<j><l>D<k><m>D(r)(s) +D<a><d>D<b><f>D<c><e>D<i><n>D<j><m>D<k><l>D(r)(s) +D<a><d>D<b><f>D<c><e>D<i><m>D<j><l>D<k><n>D(r)(s) -D<a><d>D<b><f>D<c><e>D<i><m>D<j><n>D<k><l>D(r)(s) -D<a><d>D<b><f>D<c><e>D<i><l>D<j><m>D<k><n>D(r)(s) +D<a><d>D<b><f>D<c><e>D<i><l>D<j><n>D<k><m>D(r)(s) +D<a><d>D<b><f>D<c><e>D<i>(s)D<j><l>D<k><m>D<n>(r) -D<a><d>D<b><f>D<c><e>D<i>(s)D<j><m>D<k><l>D<n>(r) -D<a><d>D<b><f>D<c><e>D<i><m>D<j><l>D<k>(s)D<n>(r) +D<a><d>D<b><f>D<c><e>D<i><m>D<j>(s)D<k><l>D<n>(r) +D<a><d>D<b><f>D<c><e>D<i><l>D<j><m>D<k>(s)D<n>(r) -D<a><d>D<b><f>D<c><e>D<i><l>D<j>(s)D<k><m>D<n>(r) -D<a><d>D<b><f>D<c><e>D<i>(s)D<j><l>D<k><n>D<m>(r) +D<a><d>D<b><f>D<c><e>D<i>(s)D<j><n>D<k><l>D<m>(r) +D<a><d>D<b><f>D<c><e>D<i><n>D<j><l>D<k>(s)D<m>(r) -D<a><d>D<b><f>D<c><e>D<i><n>D<j>(s)D<k><l>D<m>(r) -D<a><d>D<b><f>D<c><e>D<i><l>D<j><n>D<k>(s)D<m>(r) +D<a><d>D<b><f>D<c><e>D<i><l>D<j>(s)D<k><n>D<m>(r) +D<a><d>D<b><f>D<c><e>D<i>(s)D<j><m>D<k><n>D<l>(r) -D<a><d>D<b><f>D<c><e>D<i>(s)D<j><n>D<k><m>D<l>(r) -D<a><d>D<b><f>D<c><e>D<i><n>D<j><m>D<k>(s)D<l>(r) +D<a><d>D<b><f>D<c><e>D<i><n>D<j>(s)D<k><m>D<l>(r) +D<a><d>D<b><f>D<c><e>D<i><m>D<j><n>D<k>(s)D<l>(r) -D<a><d>D<b><f>D<c><e>D<i><m>D<j>(s)D<k><n>D<l>(r) -D<a><e>D<b><d>D<c><f>D<i><n>D<j><l>D<k><m>D(r)(s) +D<a><e>D<b><d>D<c><f>D<i><n>D<j><m>D<k><l>D(r)(s) +D<a><e>D<b><d>D<c><f>D<i><m>D<j><l>D<k><n>D(r)(s) -D<a><e>D<b><d>D<c><f>D<i><m>D<j><n>D<k><l>D(r)(s) -D<a><e>D<b><d>D<c><f>D<i><l>D<j><m>D<k><n>D(r)(s) +D<a><e>D<b><d>D<c><f>D<i><l>D<j><n>D<k><m>D(r)(s) +D<a><e>D<b><d>D<c><f>D<i>(s)D<j><l>D<k><m>D<n>(r) -D<a><e>D<b><d>D<c><f>D<i>(s)D<j><m>D<k><l>D<n>(r) -D<a><e>D<b><d>D<c><f>D<i><m>D<j><l>D<k>(s)D<n>(r) +D<a><e>D<b><d>D<c><f>D<i><m>D<j>(s)D<k><l>D<n>(r) +D<a><e>D<b><d>D<c><f>D<i><l>D<j><m>D<k>(s)D<n>(r) -D<a><e>D<b><d>D<c><f>D<i><l>D<j>(s)D<k><m>D<n>(r) -D<a><e>D<b><d>D<c><f>D<i>(s)D<j><l>D<k><n>D<m>(r) +D<a><e>D<b><d>D<c><f>D<i>(s)D<j><n>D<k><l>D<m>(r) +D<a><e>D<b><d>D<c><f>D<i><n>D<j><l>D<k>(s)D<m>(r) -D<a><e>D<b><d>D<c><f>D<i><n>D<j>(s)D<k><l>D<m>(r) -D<a><e>D<b><d>D<c><f>D<i><l>D<j><n>D<k>(s)D<m>(r) +D<a><e>D<b><d>D<c><f>D<i><l>D<j>(s)D<k><n>D<m>(r) +D<a><e>D<b><d>D<c><f>D<i>(s)D<j><m>D<k><n>D<l>(r) -D<a><e>D<b><d>D<c><f>D<i>(s)D<j><n>D<k><m>D<l>(r) -D<a><e>D<b><d>D<c><f>D<i><n>D<j><m>D<k>(s)D<l>(r) +D<a><e>D<b><d>D<c><f>D<i><n>D<j>(s)D<k><m>D<l>(r) +D<a><e>D<b><d>D<c><f>D<i><m>D<j><n>D<k>(s)D<l>(r) -D<a><e>D<b><d>D<c><f>D<i><m>D<j>(s)D<k><n>D<l>(r) +D<a><e>D<b><f>D<c><d>D<i><n>D<j><l>D<k><m>D(r)(s) -D<a><e>D<b><f>D<c><d>D<i><n>D<j><m>D<k><l>D(r)(s) -D<a><e>D<b><f>D<c><d>D<i><m>D<j><l>D<k><n>D(r)(s) +D<a><e>D<b><f>D<c><d>D<i><m>D<j><n>D<k><l>D(r)(s) +D<a><e>D<b><f>D<c><d>D<i><l>D<j><m>D<k><n>D(r)(s) -D<a><e>D<b><f>D<c><d>D<i><l>D<j><n>D<k><m>D(r)(s) -D<a><e>D<b><f>D<c><d>D<i>(s)D<j><l>D<k><m>D<n>(r) +D<a><e>D<b><f>D<c><d>D<i>(s)D<j><m>D<k><l>D<n>(r) +D<a><e>D<b><f>D<c><d>D<i><m>D<j><l>D<k>(s)D<n>(r) -D<a><e>D<b><f>D<c><d>D<i><m>D<j>(s)D<k><l>D<n>(r) -D<a><e>D<b><f>D<c><d>D<i><l>D<j><m>D<k>(s)D<n>(r) +D<a><e>D<b><f>D<c><d>D<i><l>D<j>(s)D<k><m>D<n>(r) +D<a><e>D<b><f>D<c><d>D<i>(s)D<j><l>D<k><n>D<m>(r) -D<a><e>D<b><f>D<c><d>D<i>(s)D<j><n>D<k><l>D<m>(r) -D<a><e>D<b><f>D<c><d>D<i><n>D<j><l>D<k>(s)D<m>(r) +D<a><e>D<b><f>D<c><d>D<i><n>D<j>(s)D<k><l>D<m>(r) +D<a><e>D<b><f>D<c><d>D<i><l>D<j><n>D<k>(s)D<m>(r) -D<a><e>D<b><f>D<c><d>D<i><l>D<j>(s)D<k><n>D<m>(r) -D<a><e>D<b><f>D<c><d>D<i>(s)D<j><m>D<k><n>D<l>(r) +D<a><e>D<b><f>D<c><d>D<i>(s)D<j><n>D<k><m>D<l>(r) +D<a><e>D<b><f>D<c><d>D<i><n>D<j><m>D<k>(s)D<l>(r) -D<a><e>D<b><f>D<c><d>D<i><n>D<j>(s)D<k><m>D<l>(r) -D<a><e>D<b><f>D<c><d>D<i><m>D<j><n>D<k>(s)D<l>(r) +D<a><e>D<b><f>D<c><d>D<i><m>D<j>(s)D<k><n>D<l>(r) +D<a><f>D<b><d>D<c><e>D<i><n>D<j><l>D<k><m>D(r)(s) -D<a><f>D<b><d>D<c><e>D<i><n>D<j><m>D<k><l>D(r)(s) -D<a><f>D<b><d>D<c><e>D<i><m>D<j><l>D<k><n>D(r)(s) +D<a><f>D<b><d>D<c><e>D<i><m>D<j><n>D<k><l>D(r)(s) +D<a><f>D<b><d>D<c><e>D<i><l>D<j><m>D<k><n>D(r)(s) -D<a><f>D<b><d>D<c><e>D<i><l>D<j><n>D<k><m>D(r)(s) -D<a><f>D<b><d>D<c><e>D<i>(s)D<j><l>D<k><m>D<n>(r) +D<a><f>D<b><d>D<c><e>D<i>(s)D<j><m>D<k><l>D<n>(r) +D<a><f>D<b><d>D<c><e>D<i><m>D<j><l>D<k>(s)D<n>(r) -D<a><f>D<b><d>D<c><e>D<i><m>D<j>(s)D<k><l>D<n>(r) -D<a><f>D<b><d>D<c><e>D<i><l>D<j><m>D<k>(s)D<n>(r) +D<a><f>D<b><d>D<c><e>D<i><l>D<j>(s)D<k><m>D<n>(r) +D<a><f>D<b><d>D<c><e>D<i>(s)D<j><l>D<k><n>D<m>(r) -D<a><f>D<b><d>D<c><e>D<i>(s)D<j><n>D<k><l>D<m>(r) -D<a><f>D<b><d>D<c><e>D<i><n>D<j><l>D<k>(s)D<m>(r) +D<a><f>D<b><d>D<c><e>D<i><n>D<j>(s)D<k><l>D<m>(r) +D<a><f>D<b><d>D<c><e>D<i><l>D<j><n>D<k>(s)D<m>(r) -D<a><f>D<b><d>D<c><e>D<i><l>D<j>(s)D<k><n>D<m>(r) -D<a><f>D<b><d>D<c><e>D<i>(s)D<j><m>D<k><n>D<l>(r) +D<a><f>D<b><d>D<c><e>D<i>(s)D<j><n>D<k><m>D<l>(r) +D<a><f>D<b><d>D<c><e>D<i><n>D<j><m>D<k>(s)D<l>(r) -D<a><f>D<b><d>D<c><e>D<i><n>D<j>(s)D<k><m>D<l>(r) -D<a><f>D<b><d>D<c><e>D<i><m>D<j><n>D<k>(s)D<l>(r) +D<a><f>D<b><d>D<c><e>D<i><m>D<j>(s)D<k><n>D<l>(r) -D<a><f>D<b><e>D<c><d>D<i><n>D<j><l>D<k><m>D(r)(s) +D<a><f>D<b><e>D<c><d>D<i><n>D<j><m>D<k><l>D(r)(s) +D<a><f>D<b><e>D<c><d>D<i><m>D<j><l>D<k><n>D(r)(s) -D<a><f>D<b><e>D<c><d>D<i><m>D<j><n>D<k><l>D(r)(s) -D<a><f>D<b><e>D<c><d>D<i><l>D<j><m>D<k><n>D(r)(s) +D<a><f>D<b><e>D<c><d>D<i><l>D<j><n>D<k><m>D(r)(s) +D<a><f>D<b><e>D<c><d>D<i>(s)D<j><l>D<k><m>D<n>(r) -D<a><f>D<b><e>D<c><d>D<i>(s)D<j><m>D<k><l>D<n>(r) -D<a><f>D<b><e>D<c><d>D<i><m>D<j><l>D<k>(s)D<n>(r) +D<a><f>D<b><e>D<c><d>D<i><m>D<j>(s)D<k><l>D<n>(r) +D<a><f>D<b><e>D<c><d>D<i><l>D<j><m>D<k>(s)D<n>(r) -D<a><f>D<b><e>D<c><d>D<i><l>D<j>(s)D<k><m>D<n>(r) -D<a><f>D<b><e>D<c><d>D<i>(s)D<j><l>D<k><n>D<m>(r) +D<a><f>D<b><e>D<c><d>D<i>(s)D<j><n>D<k><l>D<m>(r) +D<a><f>D<b><e>D<c><d>D<i><n>D<j><l>D<k>(s)D<m>(r) -D<a><f>D<b><e>D<c><d>D<i><n>D<j>(s)D<k><l>D<m>(r) -D<a><f>D<b><e>D<c><d>D<i><l>D<j><n>D<k>(s)D<m>(r) +D<a><f>D<b><e>D<c><d>D<i><l>D<j>(s)D<k><n>D<m>(r) +D<a><f>D<b><e>D<c><d>D<i>(s)D<j><m>D<k><n>D<l>(r) -D<a><f>D<b><e>D<c><d>D<i>(s)D<j><n>D<k><m>D<l>(r) -D<a><f>D<b><e>D<c><d>D<i><n>D<j><m>D<k>(s)D<l>(r) +D<a><f>D<b><e>D<c><d>D<i><n>D<j>(s)D<k><m>D<l>(r) +D<a><f>D<b><e>D<c><d>D<i><m>D<j><n>D<k>(s)D<l>(r) -D<a><f>D<b><e>D<c><d>D<i><m>D<j>(s)D<k><n>D<l>(r) +D<a>(r)D<b><d>D<c><e>D<f>(s)D<i><l>D<j><m>D<k><n> -D<a>(r)D<b><e>D<c><d>D<f>(s)D<i><l>D<j><m>D<k><n> -D<a>(r)D<b><d>D<c><f>D<e>(s)D<i><l>D<j><m>D<k><n> +D<a>(r)D<b><f>D<c><d>D<e>(s)D<i><l>D<j><m>D<k><n> +D<a>(r)D<b><e>D<c><f>D<d>(s)D<i><l>D<j><m>D<k><n> -D<a>(r)D<b><f>D<c><e>D<d>(s)D<i><l>D<j><m>D<k><n> -D<a><d>D<b>(r)D<c><e>D<f>(s)D<i><l>D<j><m>D<k><n> +D<a><e>D<b>(r)D<c><d>D<f>(s)D<i><l>D<j><m>D<k><n> +D<a><d>D<b>(r)D<c><f>D<e>(s)D<i><l>D<j><m>D<k><n> -D<a><f>D<b>(r)D<c><d>D<e>(s)D<i><l>D<j><m>D<k><n> -D<a><e>D<b>(r)D<c><f>D<d>(s)D<i><l>D<j><m>D<k><n> +D<a><f>D<b>(r)D<c><e>D<d>(s)D<i><l>D<j><m>D<k><n> +D<a><d>D<b><e>D<c>(r)D<f>(s)D<i><l>D<j><m>D<k><n> -D<a><e>D<b><d>D<c>(r)D<f>(s)D<i><l>D<j><m>D<k><n> -D<a><d>D<b><f>D<c>(r)D<e>(s)D<i><l>D<j><m>D<k><n> +D<a><f>D<b><d>D<c>(r)D<e>(s)D<i><l>D<j><m>D<k><n> +D<a><e>D<b><f>D<c>(r)D<d>(s)D<i><l>D<j><m>D<k><n> -D<a><f>D<b><e>D<c>(r)D<d>(s)D<i><l>D<j><m>D<k><n> -D<a>(r)D<b><d>D<c><e>D<f>(s)D<i><m>D<j><l>D<k><n> +D<a>(r)D<b><e>D<c><d>D<f>(s)D<i><m>D<j><l>D<k><n> +D<a>(r)D<b><d>D<c><f>D<e>(s)D<i><m>D<j><l>D<k><n> -D<a>(r)D<b><f>D<c><d>D<e>(s)D<i><m>D<j><l>D<k><n> -D<a>(r)D<b><e>D<c><f>D<d>(s)D<i><m>D<j><l>D<k><n> +D<a>(r)D<b><f>D<c><e>D<d>(s)D<i><m>D<j><l>D<k><n> +D<a><d>D<b>(r)D<c><e>D<f>(s)D<i><m>D<j><l>D<k><n> -D<a><e>D<b>(r)D<c><d>D<f>(s)D<i><m>D<j><l>D<k><n> -D<a><d>D<b>(r)D<c><f>D<e>(s)D<i><m>D<j><l>D<k><n> +D<a><f>D<b>(r)D<c><d>D<e>(s)D<i><m>D<j><l>D<k><n> +D<a><e>D<b>(r)D<c><f>D<d>(s)D<i><m>D<j><l>D<k><n> -D<a><f>D<b>(r)D<c><e>D<d>(s)D<i><m>D<j><l>D<k><n> -D<a><d>D<b><e>D<c>(r)D<f>(s)D<i><m>D<j><l>D<k><n> +D<a><e>D<b><d>D<c>(r)D<f>(s)D<i><m>D<j><l>D<k><n> +D<a><d>D<b><f>D<c>(r)D<e>(s)D<i><m>D<j><l>D<k><n> -D<a><f>D<b><d>D<c>(r)D<e>(s)D<i><m>D<j><l>D<k><n> -D<a><e>D<b><f>D<c>(r)D<d>(s)D<i><m>D<j><l>D<k><n> +D<a><f>D<b><e>D<c>(r)D<d>(s)D<i><m>D<j><l>D<k><n> -D<a>(r)D<b><d>D<c><e>D<f>(s)D<i><l>D<j><n>D<k><m> +D<a>(r)D<b><e>D<c><d>D<f>(s)D<i><l>D<j><n>D<k><m> +D<a>(r)D<b><d>D<c><f>D<e>(s)D<i><l>D<j><n>D<k><m> -D<a>(r)D<b><f>D<c><d>D<e>(s)D<i><l>D<j><n>D<k><m> -D<a>(r)D<b><e>D<c><f>D<d>(s)D<i><l>D<j><n>D<k><m> +D<a>(r)D<b><f>D<c><e>D<d>(s)D<i><l>D<j><n>D<k><m> +D<a><d>D<b>(r)D<c><e>D<f>(s)D<i><l>D<j><n>D<k><m> -D<a><e>D<b>(r)D<c><d>D<f>(s)D<i><l>D<j><n>D<k><m> -D<a><d>D<b>(r)D<c><f>D<e>(s)D<i><l>D<j><n>D<k><m> +D<a><f>D<b>(r)D<c><d>D<e>(s)D<i><l>D<j><n>D<k><m> +D<a><e>D<b>(r)D<c><f>D<d>(s)D<i><l>D<j><n>D<k><m> -D<a><f>D<b>(r)D<c><e>D<d>(s)D<i><l>D<j><n>D<k><m> -D<a><d>D<b><e>D<c>(r)D<f>(s)D<i><l>D<j><n>D<k><m> +D<a><e>D<b><d>D<c>(r)D<f>(s)D<i><l>D<j><n>D<k><m> +D<a><d>D<b><f>D<c>(r)D<e>(s)D<i><l>D<j><n>D<k><m> -D<a><f>D<b><d>D<c>(r)D<e>(s)D<i><l>D<j><n>D<k><m> -D<a><e>D<b><f>D<c>(r)D<d>(s)D<i><l>D<j><n>D<k><m> +D<a><f>D<b><e>D<c>(r)D<d>(s)D<i><l>D<j><n>D<k><m> +D<a>(r)D<b><d>D<c><e>D<f>(s)D<i><n>D<j><l>D<k><m> -D<a>(r)D<b><e>D<c><d>D<f>(s)D<i><n>D<j><l>D<k><m> -D<a>(r)D<b><d>D<c><f>D<e>(s)D<i><n>D<j><l>D<k><m> +D<a>(r)D<b><f>D<c><d>D<e>(s)D<i><n>D<j><l>D<k><m> +D<a>(r)D<b><e>D<c><f>D<d>(s)D<i><n>D<j><l>D<k><m> -D<a>(r)D<b><f>D<c><e>D<d>(s)D<i><n>D<j><l>D<k><m> -D<a><d>D<b>(r)D<c><e>D<f>(s)D<i><n>D<j><l>D<k><m> +D<a><e>D<b>(r)D<c><d>D<f>(s)D<i><n>D<j><l>D<k><m> +D<a><d>D<b>(r)D<c><f>D<e>(s)D<i><n>D<j><l>D<k><m> -D<a><f>D<b>(r)D<c><d>D<e>(s)D<i><n>D<j><l>D<k><m> -D<a><e>D<b>(r)D<c><f>D<d>(s)D<i><n>D<j><l>D<k><m> +D<a><f>D<b>(r)D<c><e>D<d>(s)D<i><n>D<j><l>D<k><m> +D<a><d>D<b><e>D<c>(r)D<f>(s)D<i><n>D<j><l>D<k><m> -D<a><e>D<b><d>D<c>(r)D<f>(s)D<i><n>D<j><l>D<k><m> -D<a><d>D<b><f>D<c>(r)D<e>(s)D<i><n>D<j><l>D<k><m> +D<a><f>D<b><d>D<c>(r)D<e>(s)D<i><n>D<j><l>D<k><m> +D<a><e>D<b><f>D<c>(r)D<d>(s)D<i><n>D<j><l>D<k><m> -D<a><f>D<b><e>D<c>(r)D<d>(s)D<i><n>D<j><l>D<k><m> +D<a>(r)D<b><d>D<c><e>D<f>(s)D<i><m>D<j><n>D<k><l> -D<a>(r)D<b><e>D<c><d>D<f>(s)D<i><m>D<j><n>D<k><l> -D<a>(r)D<b><d>D<c><f>D<e>(s)D<i><m>D<j><n>D<k><l> +D<a>(r)D<b><f>D<c><d>D<e>(s)D<i><m>D<j><n>D<k><l> +D<a>(r)D<b><e>D<c><f>D<d>(s)D<i><m>D<j><n>D<k><l> -D<a>(r)D<b><f>D<c><e>D<d>(s)D<i><m>D<j><n>D<k><l> -D<a><d>D<b>(r)D<c><e>D<f>(s)D<i><m>D<j><n>D<k><l> +D<a><e>D<b>(r)D<c><d>D<f>(s)D<i><m>D<j><n>D<k><l> +D<a><d>D<b>(r)D<c><f>D<e>(s)D<i><m>D<j><n>D<k><l> -D<a><f>D<b>(r)D<c><d>D<e>(s)D<i><m>D<j><n>D<k><l> -D<a><e>D<b>(r)D<c><f>D<d>(s)D<i><m>D<j><n>D<k><l> +D<a><f>D<b>(r)D<c><e>D<d>(s)D<i><m>D<j><n>D<k><l> +D<a><d>D<b><e>D<c>(r)D<f>(s)D<i><m>D<j><n>D<k><l> -D<a><e>D<b><d>D<c>(r)D<f>(s)D<i><m>D<j><n>D<k><l> -D<a><d>D<b><f>D<c>(r)D<e>(s)D<i><m>D<j><n>D<k><l> +D<a><f>D<b><d>D<c>(r)D<e>(s)D<i><m>D<j><n>D<k><l> +D<a><e>D<b><f>D<c>(r)D<d>(s)D<i><m>D<j><n>D<k><l> -D<a><f>D<b><e>D<c>(r)D<d>(s)D<i><m>D<j><n>D<k><l> -D<a>(r)D<b><d>D<c><e>D<f>(s)D<i><n>D<j><m>D<k><l> +D<a>(r)D<b><e>D<c><d>D<f>(s)D<i><n>D<j><m>D<k><l> +D<a>(r)D<b><d>D<c><f>D<e>(s)D<i><n>D<j><m>D<k><l> -D<a>(r)D<b><f>D<c><d>D<e>(s)D<i><n>D<j><m>D<k><l> -D<a>(r)D<b><e>D<c><f>D<d>(s)D<i><n>D<j><m>D<k><l> +D<a>(r)D<b><f>D<c><e>D<d>(s)D<i><n>D<j><m>D<k><l> +D<a><d>D<b>(r)D<c><e>D<f>(s)D<i><n>D<j><m>D<k><l> -D<a><e>D<b>(r)D<c><d>D<f>(s)D<i><n>D<j><m>D<k><l> -D<a><d>D<b>(r)D<c><f>D<e>(s)D<i><n>D<j><m>D<k><l> +D<a><f>D<b>(r)D<c><d>D<e>(s)D<i><n>D<j><m>D<k><l> +D<a><e>D<b>(r)D<c><f>D<d>(s)D<i><n>D<j><m>D<k><l> -D<a><f>D<b>(r)D<c><e>D<d>(s)D<i><n>D<j><m>D<k><l> -D<a><d>D<b><e>D<c>(r)D<f>(s)D<i><n>D<j><m>D<k><l> +D<a><e>D<b><d>D<c>(r)D<f>(s)D<i><n>D<j><m>D<k><l> +D<a><d>D<b><f>D<c>(r)D<e>(s)D<i><n>D<j><m>D<k><l> -D<a><f>D<b><d>D<c>(r)D<e>(s)D<i><n>D<j><m>D<k><l> -D<a><e>D<b><f>D<c>(r)D<d>(s)D<i><n>D<j><m>D<k><l> +D<a><f>D<b><e>D<c>(r)D<d>(s)D<i><n>D<j><m>D<k><l>"
+t33 = "t_{<i><j><k>}^{I<a><b><c>}X_{<r><s>}t_{<l><m><n>}^{J<d><e><f>}"
+#Useful functions
+
+# dlt: a delta function that sorts input based on
+#the index notation we've established.
+def dlt(x,y):
+    #Case 1: x is the same as y
+    if (x==y):
+        return ''
+    #Case 2: x, y are in the same group, or one or both is wild
+    if ((x in occ_lsta) and (y in occ_lsta)) or ((x in vrt_lsta) and (y in vrt_lsta)) or ((x in occ_lstb) and (y in occ_lstb)) or ((x in vrt_lstb) and (y in vrt_lstb)) or (x in wld_lst) or (y in wld_lst):
+        return 'D('+x+')('+y+')'
+    #Case 3: x, y can never be the same
+    return '0'
+
+# findindex: a little space-saver. Given a well-formatted
+#delta function string, will extract the indices and return
+#them as a list.
+def findindex(s):
+    lst = ind_re.findall(s)
+    l = lst[0]
+    l = l[1:-1]
+    lst[0] = l
+    l = lst[1]
+    l = l[1:-1]
+    lst[1] = l
+    return lst
+
+# tpose: takes a 2-list and switches their elements. Returns
+#the new 2-list.
+def tpose(l):
+    l1 = l[0]
+    l[0] = l[1]
+    l[1] = l1
+    return l
+
+# indecide: takes a 2-list of indices of a delta function
+#and chooses the one that should be eliminateds in the final
+#expression. Only designed to handle indices that can be
+#found in the same group, which should be fine based on the
+#way this program has been designed. Returns a 2-list again,
+#but with the index to be removed in the second position.
+def indecide(l):
+    #r will store the rank of the indices of l. Return index
+    #with higher rank.
+    r = []    
+    #Check for wild indices (if present, move to last position)
+    if (l[0] in wld_lst) and (l[1] in wld_lst):
+        r.append(wld_lst.index(l[0]))
+        r.append(wld_lst.index(l[1]))
+    elif (l[0] in wld_lst):
+        l = tpose(l)
+        return l
+    else:
+        return l
+    #Find appropriate group
+    for x in l:
+        if x in occ_lsta:
+            r.append(occ_lsta.index(x))
+        elif x in vrt_lsta:
+            r.append(vrt_lsta.index(x))
+        elif x in occ_lstb:
+            r.append(occ_lstb.index(x))
+        elif x in vrt_lstb:
+            r.append(vrt_lstb.index(x))
+    if (r[0]>r[1]):
+        l = tpose(l)
+    return l
+
+# indformat: takes a proposed index and prepares it in various
+#ways for LaTeX. First, if a capital letter is detected, it is
+#demoted to lowercase and the capitalized part of the index is
+#enclosed in a \bar{}, so that when entering indices a capital
+#may stand for the index of a beta orbital. Second, if any
+#numbers are present, they are enclosed within subscript
+#notation (_{}).
+def indformat(s):
+    cp_lst = cp_re.findall(s)
+    nt_lst = nt_re.findall(s)
+    if (len(cp_lst)>0):
+        cp = cp_lst[0]
+        s = s.replace(cp,"\\bar{"+cp.lower()+"}")
+    if (len(nt_lst)>0):
+        nt = nt_lst[0]
+        s = s.replace(nt,"_{"+nt+"}")
+    return s
+#Step 0: get user input on type of expression
+#Get user input on the type of overlap (singlet-singlet, singlet-doublet, etc.)
+ln = input("Number of excitations on the left (1, 2, or 3):\n")
+while (ln not in [1,2,3]):
+    ln = input("Try again (1, 2, or 3):\n")
+rn = input("Number of excitations on the right (1, 2, or 3):\n")
+while (rn not in [1,2,3] or rn<ln):
+    rn = input("Try again (1, 2, or 3, and no less than first number):\n")
+#Use this information to select appropriate master expression
+if (ln==1 and rn==1):
+    si = s11
+    ti = t11
+elif (ln==1 and rn==2):
+    si = s12
+    ti = t12
+elif (ln==1 and rn==3):
+    si = s13
+    ti = t13
+elif (ln==2 and rn==2):
+    si = s22
+    ti = t22
+elif (ln==2 and rn==3):
+    si = s23
+    ti = t23
+elif (ln==3 and rn==3):
+    si = s33
+    ti = t33
+#Get user input on the specific indices to be used
+fn = ln + rn
+locc = []
+rocc = []
+lvrt = []
+rvrt = []
+for i in range(ln):
+    q = "Occupied orbital "+str(i)+" on the left side:\n"
+    s = raw_input(q)
+    locc.append(s)
+for i in range(ln):
+    q = "Virtual orbital "+str(i)+" on the left side:\n"
+    s = raw_input(q)
+    lvrt.append(s)
+for i in range(rn):
+    q = "Occupied orbital "+str(i)+" on the right side:\n"
+    s = raw_input(q)
+    rocc.append(s)
+for i in range(rn):
+    q = "Virtual orbital "+str(i)+" on the right side:\n"
+    s = raw_input(q)
+    rvrt.append(s)
+focc = list(locc+rocc)
+fvrt = list(lvrt+rvrt)
+forb = list(focc+fvrt)
+#Step 1: Do situation-specific replacements
+print "si:\n"+si
+for i in range(fn):
+    occi = "<"+occ_lsta[i]+">"
+    vrti = "<"+vrt_lsta[i]+">"
+    occo = "("+focc[i]+")"
+    vrto = "("+fvrt[i]+")"
+    si = si.replace(occi,occo).replace(vrti,vrto)
+print "si:\n"+si
+#Step 2: Clean up delta function expressions 
+so = ''
+trm_list = trm_re.findall(si)
+for t in trm_list:
+    dlt_list = dlt_re.findall(t)
+    st = t[0]
+    for di in dlt_list:
+        print "di = "+di
+        ind_lst = findindex(di)
+        do = dlt(ind_lst[0],ind_lst[1])
+        print "do = "+do
+        if (do=='0'):
+            st = ""
+            break
+        st += do
+    if (st!=''):
+        so += st + ' '
+print "so:\n"+so
+
+#Step 3: Convert delta function terms into proper expression
+# with excitation coefficients and operators and print in
+# LaTeX format.
+#Preamble
+latout = "\\begin{flalign*}\n&\langle\Phi_{"
+for s in locc:
+    latout += indformat(s)
+latout += "}^{"
+for s in lvrt:
+    latout += indformat(s)
+latout += "}\\vert\Phi_{"
+for s in rocc:
+    latout += indformat(s)
+latout += "}^{"
+for s in rvrt:
+    latout += indformat(s)
+latout += "}\\rangle = "
+#Term-by-term
+trm_list = trm_re.findall(so)
+#No terms? Whole thing is zero.
+if (len(trm_list)==0):
+    latout += "0"
+else:
+    for t in trm_list:
+        print "NEW TERM!"
+        print "t = "+t
+        #Assign sign
+        latout += t[0]
+        #Extract relevant information from delta functions
+        dlt_list = dlt_re.findall(t)
+        ind_lst = []
+        for d in dlt_list:
+            print "d = "+d
+            ind = findindex(d)
+            print "ind = ",ind
+            ind_lst.append(ind)
+        print "ind_lst = ",ind_lst
+        #Assign list of indices over which to sum
+        #Get full list of possible indices
+        sumind = []
+        for o in focc:
+            nt_lst = nt_re.findall(o)
+            if (len(nt_lst)==0):
+                sumind.append(o)
+        for v in fvrt:
+            nt_lst = nt_re.findall(v)
+            if (len(nt_lst)==0):
+                sumind.append(v)
+        tocc = list(focc) #Eventually replace duplicates for full expression
+        tvrt = list(fvrt) # (ditto)
+        twld = list(wld_lst) # (ditto)
+        #Then remove unnecessary indices
+        #Make list of indices to remove from summation in final
+        #expression (also reorder so that the one to be removed
+        #is always second in its entry in ind_lst).
+        indremove = []
+        for i in range(len(ind_lst)):
+            ind = indecide(ind_lst[i])
+            ind_lst[i] = ind
+            indremove.append(ind[1])
+        #Remove them (for subscript of sum symbol)
+        for x in indremove:
+            if x in sumind:
+                sumind.remove(x)
+        #Copy master term and make appropriate replacements
+        tt = ti
+        #Special case: have D(r)(s)
+        if (['r','s'] in ind_lst):
+            ind_lst.remove(['r','s'])
+            tt = tt.replace("X_{<r><s>}","X_{GS}")
+        #Replace remaining indices (for placement in expression)
+        for l in ind_lst:
+            if (l[1] in tocc):
+                tocc[tocc.index(l[1])] = l[0]
+            elif (l[1] in tvrt):
+                tvrt[tvrt.index(l[1])] = l[0]
+            elif (l[1] in twld):
+                print "wild index found"
+                print "before twld = ",twld
+                twld[twld.index(l[1])] = l[0]
+                print "after twld = ",twld
+        for i in range(fn):
+            occi = "<"+occ_lsta[i]+">"
+            vrti = "<"+vrt_lsta[i]+">"
+            occo = indformat(tocc[i])
+            vrto = indformat(tvrt[i])
+            tt = tt.replace(occi,occo).replace(vrti,vrto)
+        for i in range(len(wld_lst)):
+            wldi = "<"+wld_lst[i]+">"
+            print "wldi = "+wldi
+            wldo = indformat(twld[i])
+            print "wldo = "+wldo
+            tt = tt.replace(wldi,wldo)
+        #Write summation symbol (if necessary) and then finish up
+        if (len(sumind)>0):
+            latout += "\sum_{"
+            for x in sumind:
+                latout += indformat(x)
+            latout += "}"
+        latout += tt + " "
+latout += "&\n\end{flalign*} \n"
+print latout
+f = open("sf-xcis.tex",'a')
+if ("0" not in latout):
+    f.write(latout)
+f.close()
+

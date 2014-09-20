@@ -1,0 +1,316 @@
+Welcome to sq-full, the second-quantization calculator.
+What kind of states would you like to combine?
+Left state : singles (1), doubles (2), triples (3), singles on singles (4), Hartree-Fock ground state (5), or custom (0)?
+You have chosen:  1
+Right state: singles (1), doubles (2), triples (3), singles on singles (4), Hartree-Fock ground state (5), or custom (0)?
+You have chosen:  1
+What kind of operator would you like to use?
+One-electron operator X (1), two-electron operator Pi (2), Fock matrix F (3), or custom (0)?
+You have chosen:  1
+Please type the index for occupied orbital 1 on the left side.
+Please type the index for virtual orbital 1 on the left side.
+Please type the index for occupied orbital 1 on the right side.
+Please type the index for virtual orbital 1 on the right side.
+lt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}
+lt_to_sq: op_lst: ('X_{<r><s>}', '')
+lt_to_sq: lt_s: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}
+input_string: (i+)(a-)(r+)(s-)(b+)(j-)
+Currently, this program plans to print the results which sum over the following indices:
+['i', 'j', 'a', 'b', 'r', 's']
+Would you like to sum over all of these indices (1) or would you like to sum over a set of indices which you will specify now (2)?
+You have chosen:  2
+Please enter the indices that you would like to sum over, then press return when you are finished:
+You have entered:  rs
+stol: l= [[1, [], ['i+', 'a-', 'r+', 's-', 'b+', 'j-']]]
+mysqt_l:  [[1, [], ['i+', 'a-', 'r+', 's-', 'b+', 'j-']]]
+len(mysqt_l):  1
+cleanup: l: [[1, [], ['i+', 'a-', 'r+', 's-', 'b+', 'j-']]]
+mysqt_l: [[1, [], ['i+', 'a-', 'r+', 's-', 'b+', 'j-']]]
+choose_move:  1
+cleanup: l: [[-1, [], ['i+', 'r+', 'a-', 's-', 'b+', 'j-']]]
+cleanup: l: [[1, [['a', 'r']], ['i+', 's-', 'b+', 'j-']]]
+mysqt_l: [[-1, [], ['i+', 'r+', 'a-', 's-', 'b+', 'j-']], [1, [['a', 'r']], ['i+', 's-', 'b+', 'j-']]]
+choose_move:  0
+choose_move:  2
+cleanup: l: [[1, [], ['i+', 'r+', 's-', 'a-', 'b+', 'j-']]]
+cleanup: l: [[-1, [['a', 'r']], ['s-', 'i+', 'b+', 'j-']]]
+cleanup: l: [[1, [['a', 'r'], ['i', 's']], ['b+', 'j-']]]
+cleanup: occ. annihilation or virt. creation at leftmost position.
+mysqt_l: [[1, [], ['i+', 'r+', 's-', 'a-', 'b+', 'j-']], [-1, [['a', 'r']], ['s-', 'i+', 'b+', 'j-']]]
+choose_move:  1
+choose_move:  3
+cleanup: l: [[-1, [], ['i+', 'r+', 's-', 'b+', 'a-', 'j-']]]
+cleanup: l: [[1, [['a', 'b']], ['i+', 'r+', 's-', 'j-']]]
+cleanup: l: [[1, [['a', 'r']], ['s-', 'b+', 'i+', 'j-']]]
+mysqt_l: [[-1, [], ['i+', 'r+', 's-', 'b+', 'a-', 'j-']], [1, [['a', 'b']], ['i+', 'r+', 's-', 'j-']], [1, [['a', 'r']], ['s-', 'b+', 'i+', 'j-']]]
+choose_move:  2
+choose_move:  0
+choose_move:  4
+cleanup: l: [[1, [], ['i+', 'r+', 's-', 'b+', 'j-', 'a-']]]
+cleanup: occ. creation or virt. annihilation at rightmost position.
+cleanup: l: [[-1, [['a', 'b']], ['r+', 'i+', 's-', 'j-']]]
+cleanup: l: [[-1, [['a', 'r']], ['s-', 'b+', 'j-', 'i+']]]
+cleanup: occ. creation or virt. annihilation at rightmost position.
+cleanup: l: [[1, [['a', 'r'], ['i', 'j']], ['s-', 'b+']]]
+mysqt_l: [[-1, [['a', 'b']], ['r+', 'i+', 's-', 'j-']], [1, [['a', 'r'], ['i', 'j']], ['s-', 'b+']]]
+choose_move:  0
+choose_move:  1
+cleanup: l: [[1, [['a', 'b']], ['r+', 's-', 'i+', 'j-']]]
+cleanup: l: [[-1, [['a', 'b'], ['i', 's']], ['r+', 'j-']]]
+cleanup: l: [[-1, [['a', 'r'], ['i', 'j']], ['b+', 's-']]]
+cleanup: occ. annihilation or virt. creation at leftmost position.
+mysqt_l: [[1, [['a', 'b']], ['r+', 's-', 'i+', 'j-']], [-1, [['a', 'b'], ['i', 's']], ['r+', 'j-']]]
+choose_move:  0
+choose_move:  2
+cleanup: l: [[-1, [['a', 'b']], ['r+', 's-', 'j-', 'i+']]]
+cleanup: occ. creation or virt. annihilation at rightmost position.
+cleanup: l: [[1, [['a', 'b'], ['i', 'j']], ['r+', 's-']]]
+cleanup: wild card delta function created
+cleanup: l: [[1, [['a', 'b'], ['i', 's']], ['j-', 'r+']]]
+cleanup: occ. annihilation or virt. creation at leftmost position.
+mysqt_l: [[1, [['a', 'b'], ['i', 'j'], ['r', 's']], []]]
+(before) delta_l:  [[1, [['a', 'r'], ['i', 'j'], ['s', 'b']]], [-1, [['a', 'b'], ['i', 's'], ['r', 'j']]], [1, [['a', 'b'], ['i', 'j'], ['r', 's']]]]
+hi_coup: dl (1):  [[1, [['a', 'b'], ['i', 'j'], ['r', 's']]]]
+hi_coup: ind_lst:  ['A', 'B', 'C', 'D', 'E', 'F', 'I', 'J', 'K', 'L', 'M', 'N', 'S1', 'S2', 'a', 'b', 'c', 'd', 'e', 'f', 'i', 'j', 'k', 'l', 'm', 'n', 'r', 's', 's1', 's2', 't', 'u']
+hi_coup: no match found. d: ['a', 'b'] , mat_llst: []
+hi_coup: no match found. d: ['i', 'j'] , mat_llst: [['a', 'b']]
+hi_coup: no match found. d: ['r', 's'] , mat_llst: [['a', 'b'], ['i', 'j']]
+mat_llst (1): [['a', 'b'], ['i', 'j'], ['r', 's']]
+hi_coup: mat_llst: [['a', 'b'], ['i', 'j'], ['r', 's']]
+hi_coup: ind: a
+hi_coup: ind: b
+hi_coup: ind: i
+hi_coup: ind: j
+hi_coup: ind: r
+hi_coup: ind: s
+ind_key: s:  a
+ind_key =  2
+ind_key: s:  b
+ind_key =  3
+ind_key: s:  i
+ind_key =  0
+ind_key: s:  j
+ind_key =  1
+ind_key: s:  r
+ind_key =  4
+ind_key: s:  s
+ind_key =  5
+mat_llst (2): [['a', 'b'], ['i', 'j'], ['r', 's']]
+hi_coup: mat_llst[i]: ['a', 'b']
+hi_coup: iind: a
+hi_coup: jind: b
+hi_coup: appending [a,b]
+hi_coup: mat_llst[i]: ['i', 'j']
+hi_coup: iind: i
+hi_coup: jind: j
+hi_coup: appending [i,j]
+hi_coup: mat_llst[i]: ['r', 's']
+hi_coup: iind: r
+hi_coup: jind: s
+hi_coup: appending [r,s]
+hi_coup: dl (2):  [[1, [['a', 'b'], ['i', 'j'], ['r', 's']]]]
+hi_coup: dl (3):  [[1, [['a', 'b'], ['i', 'j'], ['r', 's']]]]
+hi_coup: dl (1):  [[-1, [['a', 'b'], ['i', 's'], ['r', 'j']]]]
+hi_coup: ind_lst:  ['A', 'B', 'C', 'D', 'E', 'F', 'I', 'J', 'K', 'L', 'M', 'N', 'S1', 'S2', 'a', 'b', 'c', 'd', 'e', 'f', 'i', 'j', 'k', 'l', 'm', 'n', 'r', 's', 's1', 's2', 't', 'u']
+hi_coup: no match found. d: ['a', 'b'] , mat_llst: []
+hi_coup: no match found. d: ['i', 's'] , mat_llst: [['a', 'b']]
+hi_coup: no match found. d: ['r', 'j'] , mat_llst: [['a', 'b'], ['i', 's']]
+mat_llst (1): [['a', 'b'], ['i', 's'], ['r', 'j']]
+hi_coup: mat_llst: [['a', 'b'], ['i', 's'], ['r', 'j']]
+hi_coup: ind: a
+hi_coup: ind: b
+hi_coup: ind: i
+hi_coup: ind: s
+hi_coup: ind: r
+hi_coup: ind: j
+ind_key: s:  a
+ind_key =  2
+ind_key: s:  b
+ind_key =  3
+ind_key: s:  i
+ind_key =  0
+ind_key: s:  s
+ind_key =  5
+ind_key: s:  r
+ind_key =  4
+ind_key: s:  j
+ind_key =  1
+mat_llst (2): [['a', 'b'], ['i', 's'], ['j', 'r']]
+hi_coup: mat_llst[i]: ['a', 'b']
+hi_coup: iind: a
+hi_coup: jind: b
+hi_coup: appending [a,b]
+hi_coup: mat_llst[i]: ['i', 's']
+hi_coup: iind: i
+hi_coup: jind: s
+hi_coup: appending [i,s]
+hi_coup: mat_llst[i]: ['j', 'r']
+hi_coup: iind: j
+hi_coup: jind: r
+hi_coup: appending [j,r]
+hi_coup: dl (2):  [[-1, [['a', 'b'], ['i', 's'], ['j', 'r']]]]
+hi_coup: dl (3):  [[-1, [['a', 'b'], ['i', 's'], ['j', 'r']]]]
+hi_coup: dl (1):  [[1, [['a', 'r'], ['i', 'j'], ['s', 'b']]]]
+hi_coup: ind_lst:  ['A', 'B', 'C', 'D', 'E', 'F', 'I', 'J', 'K', 'L', 'M', 'N', 'S1', 'S2', 'a', 'b', 'c', 'd', 'e', 'f', 'i', 'j', 'k', 'l', 'm', 'n', 'r', 's', 's1', 's2', 't', 'u']
+hi_coup: no match found. d: ['a', 'r'] , mat_llst: []
+hi_coup: no match found. d: ['i', 'j'] , mat_llst: [['a', 'r']]
+hi_coup: no match found. d: ['s', 'b'] , mat_llst: [['a', 'r'], ['i', 'j']]
+mat_llst (1): [['a', 'r'], ['i', 'j'], ['s', 'b']]
+hi_coup: mat_llst: [['a', 'r'], ['i', 'j'], ['s', 'b']]
+hi_coup: ind: a
+hi_coup: ind: r
+hi_coup: ind: i
+hi_coup: ind: j
+hi_coup: ind: s
+hi_coup: ind: b
+ind_key: s:  a
+ind_key =  2
+ind_key: s:  r
+ind_key =  4
+ind_key: s:  i
+ind_key =  0
+ind_key: s:  j
+ind_key =  1
+ind_key: s:  s
+ind_key =  5
+ind_key: s:  b
+ind_key =  3
+mat_llst (2): [['a', 'r'], ['i', 'j'], ['b', 's']]
+hi_coup: mat_llst[i]: ['a', 'r']
+hi_coup: iind: a
+hi_coup: jind: r
+hi_coup: appending [a,r]
+hi_coup: mat_llst[i]: ['i', 'j']
+hi_coup: iind: i
+hi_coup: jind: j
+hi_coup: appending [i,j]
+hi_coup: mat_llst[i]: ['b', 's']
+hi_coup: iind: b
+hi_coup: jind: s
+hi_coup: appending [b,s]
+hi_coup: dl (2):  [[1, [['a', 'r'], ['i', 'j'], ['b', 's']]]]
+hi_coup: dl (3):  [[1, [['a', 'r'], ['i', 'j'], ['b', 's']]]]
+(after)  delta_l:  [[1, [['a', 'r'], ['i', 'j'], ['b', 's']]], [-1, [['a', 'b'], ['i', 's'], ['j', 'r']]], [1, [['a', 'b'], ['i', 'j'], ['r', 's']]]]
+lt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}
+tlt_tmp (before): d:  ['a', 'r'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}
+tlt_tmp (after) : d:  ['a', 'r'] , tlt_tmp: t_{<i>}^{I<a>}X_{(a)<s>}t_{<j>}^{J<b>}
+tlt_tmp (before): d:  ['i', 'j'] , tlt_tmp: t_{<i>}^{I<a>}X_{(a)<s>}t_{<j>}^{J<b>}
+tlt_tmp (after) : d:  ['i', 'j'] , tlt_tmp: t_{<i>}^{I<a>}X_{(a)<s>}t_{(i)}^{J<b>}
+tlt_tmp (before): d:  ['b', 's'] , tlt_tmp: t_{<i>}^{I<a>}X_{(a)<s>}t_{(i)}^{J<b>}
+tlt_tmp (after) : d:  ['b', 's'] , tlt_tmp: t_{<i>}^{I<a>}X_{(a)(b)}t_{(i)}^{J<b>}
+tlt_tmp (before): d:  ['a', 'b'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}
+tlt_tmp (after) : d:  ['a', 'b'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J(a)}
+tlt_tmp (before): d:  ['i', 's'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J(a)}
+tlt_tmp (after) : d:  ['i', 's'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r>(i)}t_{<j>}^{J(a)}
+tlt_tmp (before): d:  ['j', 'r'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r>(i)}t_{<j>}^{J(a)}
+tlt_tmp (after) : d:  ['j', 'r'] , tlt_tmp: t_{<i>}^{I<a>}X_{(j)(i)}t_{<j>}^{J(a)}
+tlt_tmp (before): d:  ['a', 'b'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J<b>}
+tlt_tmp (after) : d:  ['a', 'b'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J(a)}
+tlt_tmp (before): d:  ['i', 'j'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{<j>}^{J(a)}
+tlt_tmp (after) : d:  ['i', 'j'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{(i)}^{J(a)}
+tlt_tmp (before): d:  ['r', 's'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r><s>}t_{(i)}^{J(a)}
+tlt_tmp (after) : d:  ['r', 's'] , tlt_tmp: t_{<i>}^{I<a>}X_{<r>(r)}t_{(i)}^{J(a)}
+so1: (before) (out_lst[ti])[2]: t_{(i)}^{I(a)}X_{(a)(b)}t_{(i)}^{J(b)}
+so1: temp_lst: []
+so1: (after)  (out_lst[ti])[2]: t_{(i)}^{I(a)}X_{(a)(b)}t_{(i)}^{J(b)}
+so1: (before) (out_lst[ti])[2]: t_{(i)}^{I(a)}X_{(j)(i)}t_{(j)}^{J(a)}
+so1: temp_lst: []
+so1: (after)  (out_lst[ti])[2]: t_{(i)}^{I(a)}X_{(j)(i)}t_{(j)}^{J(a)}
+so1: (before) (out_lst[ti])[2]: t_{(i)}^{I(a)}X_{(r)(r)}t_{(i)}^{J(a)}
+so1: temp_lst: [0]
+so1: (after)  (out_lst[ti])[2]: t_{(i)}^{I(a)}X_{(r)(r)}t_{(i)}^{J(a)}
+out_lst (1):  [1, [], 't_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}']
+out_lst (1):  [-1, [], 't_{<i>}^{I<a>}X_{<j><i>}t_{<j>}^{J<a>}']
+out_lst (1):  [1, ['r'], 't_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}']
+opindord: t (before): [[1, ['r'], 't_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}']]
+opindord: temp_lst: ('<r><r>', '')
+opindord: tind_lst: ['r', 'r']
+opindord: perm_lst: [[['r', 'r'], 2626, 1], [['r', 'r'], 2626, 1]]
+opindord: perm_lst: [[['r', 'r'], 2626, 1], [['r', 'r'], 2626, 1]]
+opindord: t (after) : [[1, ['r'], 't_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}']]
+opindord: t (before): [[-1, [], 't_{<i>}^{I<a>}X_{<j><i>}t_{<j>}^{J<a>}']]
+opindord: temp_lst: ('<j><i>', '')
+opindord: tind_lst: ['j', 'i']
+opindord: perm_lst: [[['j', 'i'], 2120, 1], [['i', 'j'], 2021, 1]]
+opindord: perm_lst: [[['i', 'j'], 2021, 1], [['j', 'i'], 2120, 1]]
+opindord: t (after) : [[-1, [], 't_{<i>}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}']]
+opindord: t (before): [[1, [], 't_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}']]
+opindord: temp_lst: ('<a><b>', '')
+opindord: tind_lst: ['a', 'b']
+opindord: perm_lst: [[['a', 'b'], 1415, 1], [['b', 'a'], 1514, 1]]
+opindord: perm_lst: [[['a', 'b'], 1415, 1], [['b', 'a'], 1514, 1]]
+opindord: t (after) : [[1, [], 't_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}']]
+out_lst (2):  [1, [], 't_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}']
+out_lst (2):  [-1, [], 't_{<i>}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}']
+out_lst (2):  [1, ['r'], 't_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}']
+out_lst (3):  [1, [], 't_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}']
+out_lst (3):  [-1, [], 't_{<i>}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}']
+out_lst (3):  [1, ['r'], 't_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}']
+out_lst (4):  [1, [], 't_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}']
+out_lst (4):  [-1, [], 't_{<i>}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}']
+out_lst (4):  [1, ['r'], 't_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}']
+tlt_tmp (before): s:  <i> , tlt_tmp: t_{<i>}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}
+tlt_tmp: replacing  <i>  with  i
+tlt_tmp (after) : s:  <i> , tlt_tmp: t_{i}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}
+tlt_tmp (before): s:  <a> , tlt_tmp: t_{i}^{I<a>}X_{<a><b>}t_{<i>}^{J<b>}
+tlt_tmp: replacing  <a>  with  a
+tlt_tmp (after) : s:  <a> , tlt_tmp: t_{i}^{Ia}X_{<a><b>}t_{<i>}^{J<b>}
+tlt_tmp (before): s:  <a> , tlt_tmp: t_{i}^{Ia}X_{<a><b>}t_{<i>}^{J<b>}
+tlt_tmp: replacing  <a>  with  a
+tlt_tmp (after) : s:  <a> , tlt_tmp: t_{i}^{Ia}X_{a<b>}t_{<i>}^{J<b>}
+tlt_tmp (before): s:  <b> , tlt_tmp: t_{i}^{Ia}X_{a<b>}t_{<i>}^{J<b>}
+tlt_tmp: replacing  <b>  with  b
+tlt_tmp (after) : s:  <b> , tlt_tmp: t_{i}^{Ia}X_{ab}t_{<i>}^{J<b>}
+tlt_tmp (before): s:  <i> , tlt_tmp: t_{i}^{Ia}X_{ab}t_{<i>}^{J<b>}
+tlt_tmp: replacing  <i>  with  i
+tlt_tmp (after) : s:  <i> , tlt_tmp: t_{i}^{Ia}X_{ab}t_{i}^{J<b>}
+tlt_tmp (before): s:  <b> , tlt_tmp: t_{i}^{Ia}X_{ab}t_{i}^{J<b>}
+tlt_tmp: replacing  <b>  with  b
+tlt_tmp (after) : s:  <b> , tlt_tmp: t_{i}^{Ia}X_{ab}t_{i}^{Jb}
+tlt_tmp (before): s:  <i> , tlt_tmp: t_{<i>}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}
+tlt_tmp: replacing  <i>  with  i
+tlt_tmp (after) : s:  <i> , tlt_tmp: t_{i}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}
+tlt_tmp (before): s:  <a> , tlt_tmp: t_{i}^{I<a>}X_{<i><j>}t_{<j>}^{J<a>}
+tlt_tmp: replacing  <a>  with  a
+tlt_tmp (after) : s:  <a> , tlt_tmp: t_{i}^{Ia}X_{<i><j>}t_{<j>}^{J<a>}
+tlt_tmp (before): s:  <i> , tlt_tmp: t_{i}^{Ia}X_{<i><j>}t_{<j>}^{J<a>}
+tlt_tmp: replacing  <i>  with  i
+tlt_tmp (after) : s:  <i> , tlt_tmp: t_{i}^{Ia}X_{i<j>}t_{<j>}^{J<a>}
+tlt_tmp (before): s:  <j> , tlt_tmp: t_{i}^{Ia}X_{i<j>}t_{<j>}^{J<a>}
+tlt_tmp: replacing  <j>  with  j
+tlt_tmp (after) : s:  <j> , tlt_tmp: t_{i}^{Ia}X_{ij}t_{<j>}^{J<a>}
+tlt_tmp (before): s:  <j> , tlt_tmp: t_{i}^{Ia}X_{ij}t_{<j>}^{J<a>}
+tlt_tmp: replacing  <j>  with  j
+tlt_tmp (after) : s:  <j> , tlt_tmp: t_{i}^{Ia}X_{ij}t_{j}^{J<a>}
+tlt_tmp (before): s:  <a> , tlt_tmp: t_{i}^{Ia}X_{ij}t_{j}^{J<a>}
+tlt_tmp: replacing  <a>  with  a
+tlt_tmp (after) : s:  <a> , tlt_tmp: t_{i}^{Ia}X_{ij}t_{j}^{Ja}
+tlt_tmp (before): s:  <i> , tlt_tmp: t_{<i>}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}
+tlt_tmp: replacing  <i>  with  i
+tlt_tmp (after) : s:  <i> , tlt_tmp: t_{i}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}
+tlt_tmp (before): s:  <a> , tlt_tmp: t_{i}^{I<a>}X_{<r><r>}t_{<i>}^{J<a>}
+tlt_tmp: replacing  <a>  with  a
+tlt_tmp (after) : s:  <a> , tlt_tmp: t_{i}^{Ia}X_{<r><r>}t_{<i>}^{J<a>}
+tlt_tmp (before): s:  <r> , tlt_tmp: t_{i}^{Ia}X_{<r><r>}t_{<i>}^{J<a>}
+tlt_tmp: replacing  <r>  with  r
+tlt_tmp (after) : s:  <r> , tlt_tmp: t_{i}^{Ia}X_{r<r>}t_{<i>}^{J<a>}
+tlt_tmp (before): s:  <r> , tlt_tmp: t_{i}^{Ia}X_{r<r>}t_{<i>}^{J<a>}
+tlt_tmp: replacing  <r>  with  r
+tlt_tmp (after) : s:  <r> , tlt_tmp: t_{i}^{Ia}X_{rr}t_{<i>}^{J<a>}
+tlt_tmp (before): s:  <i> , tlt_tmp: t_{i}^{Ia}X_{rr}t_{<i>}^{J<a>}
+tlt_tmp: replacing  <i>  with  i
+tlt_tmp (after) : s:  <i> , tlt_tmp: t_{i}^{Ia}X_{rr}t_{i}^{J<a>}
+tlt_tmp (before): s:  <a> , tlt_tmp: t_{i}^{Ia}X_{rr}t_{i}^{J<a>}
+tlt_tmp: replacing  <a>  with  a
+tlt_tmp (after) : s:  <a> , tlt_tmp: t_{i}^{Ia}X_{rr}t_{i}^{Ja}
+out_lst (5):  [1, [], 't_{i}^{Ia}X_{ab}t_{i}^{Jb}']
+out_lst (5):  [-1, [], 't_{i}^{Ia}X_{ij}t_{j}^{Ja}']
+out_lst (5):  [1, ['r'], 't_{i}^{Ia}X_{rr}t_{i}^{Ja}']
+(out_lst[ti])[0]: 1
+(out_lst[ti])[0]: -1
+(out_lst[ti])[0]: 1
+\begin{flalign*}
+&t_{i}^{Ia}\langle\Phi_{i}^{a}\vert X\vert\Phi_{j}^{b}\rangle t_{j}^{Jb} =t_{i}^{Ia}X_{ab}t_{i}^{Jb} -t_{i}^{Ia}X_{ij}t_{j}^{Ja} +\sum_{\substack{r}}t_{i}^{Ia}X_{rr}t_{i}^{Ja}&\\
+&
+\end{flalign*} 
+

@@ -1,0 +1,273 @@
+\documentclass[8pt]{revtex4}
+\renewcommand{\baselinestretch}{1}
+\usepackage{amsmath,amssymb,setspace}
+\bibliographystyle{apsrev}
+\addtolength{\oddsidemargin}{-.5in}
+\addtolength{\evensidemargin}{-.5in}
+%\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.3in}
+%\addtolength{\textheight}{1.75in}
+
+\begin{document}
+\singlespacing
+\setlength\abovedisplayskip{0pt}
+\setlength\belowdisplayskip{0pt}
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{s_{1}}^{\bar{s}_{2}}\rangle = +t_{s_{1}}^{I\bar{s}_{2}}X_{GS}t_{s_{1}}^{J\bar{s}_{2}} -t_{s_{1}}^{I\bar{s}_{2}}X_{s_{1}s_{1}}t_{s_{1}}^{J\bar{s}_{2}} +t_{s_{1}}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{s_{1}}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{s_{1}}^{\bar{s}_{1}}\rangle = +t_{s_{1}}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{1}}t_{s_{1}}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{s_{2}}^{\bar{s}_{2}}\rangle = -t_{s_{1}}^{I\bar{s}_{2}}X_{s_{2}s_{1}}t_{s_{2}}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{j}^{\bar{s}_{2}}\rangle = -\sum_{j}t_{s_{1}}^{I\bar{s}_{2}}X_{js_{1}}t_{j}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{s_{1}}^{\bar{b}}\rangle = +\sum_{\bar{b}}t_{s_{1}}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{b}}t_{s_{1}}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{s_{2}}^{\bar{s}_{1}}\rangle = +t_{s_{2}}^{I\bar{s}_{1}}X_{GS}t_{s_{2}}^{J\bar{s}_{1}} -t_{s_{2}}^{I\bar{s}_{1}}X_{s_{2}s_{2}}t_{s_{2}}^{J\bar{s}_{1}} +t_{s_{2}}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{s_{2}}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{s_{1}}^{\bar{s}_{1}}\rangle = -t_{s_{2}}^{I\bar{s}_{1}}X_{s_{1}s_{2}}t_{s_{1}}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{s_{2}}^{\bar{s}_{2}}\rangle = +t_{s_{2}}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{2}}t_{s_{2}}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{j}^{\bar{s}_{1}}\rangle = -\sum_{j}t_{s_{2}}^{I\bar{s}_{1}}X_{js_{2}}t_{j}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{s_{2}}^{\bar{b}}\rangle = +\sum_{\bar{b}}t_{s_{2}}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{b}}t_{s_{2}}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{s_{1}}^{\bar{s}_{1}}\rangle = +t_{s_{1}}^{I\bar{s}_{1}}X_{GS}t_{s_{1}}^{J\bar{s}_{1}} -t_{s_{1}}^{I\bar{s}_{1}}X_{s_{1}s_{1}}t_{s_{1}}^{J\bar{s}_{1}} +t_{s_{1}}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{s_{1}}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{j}^{\bar{s}_{1}}\rangle = -\sum_{j}t_{s_{1}}^{I\bar{s}_{1}}X_{js_{1}}t_{j}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{s_{1}}^{\bar{b}}\rangle = +\sum_{\bar{b}}t_{s_{1}}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{b}}t_{s_{1}}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{s_{2}}^{\bar{s}_{2}}\rangle = +t_{s_{2}}^{I\bar{s}_{2}}X_{GS}t_{s_{2}}^{J\bar{s}_{2}} -t_{s_{2}}^{I\bar{s}_{2}}X_{s_{2}s_{2}}t_{s_{2}}^{J\bar{s}_{2}} +t_{s_{2}}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{s_{2}}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{j}^{\bar{s}_{2}}\rangle = -\sum_{j}t_{s_{2}}^{I\bar{s}_{2}}X_{js_{2}}t_{j}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{s_{2}}^{\bar{b}}\rangle = +\sum_{\bar{b}}t_{s_{2}}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{b}}t_{s_{2}}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{j}^{\bar{s}_{1}}\rangle = +\sum_{i}t_{i}^{I\bar{s}_{1}}X_{GS}t_{i}^{J\bar{s}_{1}} -\sum_{ij}t_{i}^{I\bar{s}_{1}}X_{ji}t_{j}^{J\bar{s}_{1}} +\sum_{i}t_{i}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{i}^{J\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{j}^{\bar{s}_{2}}\rangle = +\sum_{i}t_{i}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{2}}t_{i}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{j}^{\bar{b}}\rangle = +\sum_{i\bar{b}}t_{i}^{I\bar{s}_{1}}X_{\bar{s}_{1}\bar{b}}t_{i}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{2}}\vert\Phi_{j}^{\bar{s}_{2}}\rangle = +\sum_{i}t_{i}^{I\bar{s}_{2}}X_{GS}t_{i}^{J\bar{s}_{2}} -\sum_{ij}t_{i}^{I\bar{s}_{2}}X_{ji}t_{j}^{J\bar{s}_{2}} +\sum_{i}t_{i}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{i}^{J\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{2}}\vert\Phi_{j}^{\bar{b}}\rangle = +\sum_{i\bar{b}}t_{i}^{I\bar{s}_{2}}X_{\bar{s}_{2}\bar{b}}t_{i}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{a}}\vert\Phi_{s_{1}}^{\bar{b}}\rangle = +\sum_{\bar{a}}t_{s_{1}}^{I\bar{a}}X_{GS}t_{s_{1}}^{J\bar{a}} -\sum_{\bar{a}}t_{s_{1}}^{I\bar{a}}X_{s_{1}s_{1}}t_{s_{1}}^{J\bar{a}} +\sum_{\bar{a}\bar{b}}t_{s_{1}}^{I\bar{a}}X_{\bar{a}\bar{b}}t_{s_{1}}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{a}}\vert\Phi_{s_{2}}^{\bar{b}}\rangle = -\sum_{\bar{a}}t_{s_{1}}^{I\bar{a}}X_{s_{2}s_{1}}t_{s_{2}}^{J\bar{a}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{a}}\vert\Phi_{j}^{\bar{b}}\rangle = -\sum_{j\bar{a}}t_{s_{1}}^{I\bar{a}}X_{js_{1}}t_{j}^{J\bar{a}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{a}}\vert\Phi_{s_{2}}^{\bar{b}}\rangle = +\sum_{\bar{a}}t_{s_{2}}^{I\bar{a}}X_{GS}t_{s_{2}}^{J\bar{a}} -\sum_{\bar{a}}t_{s_{2}}^{I\bar{a}}X_{s_{2}s_{2}}t_{s_{2}}^{J\bar{a}} +\sum_{\bar{a}\bar{b}}t_{s_{2}}^{I\bar{a}}X_{\bar{a}\bar{b}}t_{s_{2}}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{a}}\vert\Phi_{j}^{\bar{b}}\rangle = -\sum_{j\bar{a}}t_{s_{2}}^{I\bar{a}}X_{js_{2}}t_{j}^{J\bar{a}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{a}}\vert\Phi_{j}^{\bar{b}}\rangle = +\sum_{i\bar{a}}t_{i}^{I\bar{a}}X_{GS}t_{i}^{J\bar{a}} -\sum_{ij\bar{a}}t_{i}^{I\bar{a}}X_{ji}t_{j}^{J\bar{a}} +\sum_{i\bar{a}\bar{b}}t_{i}^{I\bar{a}}X_{\bar{a}\bar{b}}t_{i}^{J\bar{b}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{js_{1}}^{b\bar{s}_{2}}\rangle = -\sum_{jb}t_{s_{1}}^{I\bar{s}_{2}}X_{jb}t_{js_{1}}^{Jb\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = +\sum_{j}t_{s_{1}}^{I\bar{s}_{2}}X_{j\bar{s}_{1}}t_{js_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{s_{1}s_{2}}^{b\bar{s}_{2}}\rangle = +\sum_{b}t_{s_{1}}^{I\bar{s}_{2}}X_{s_{2}b}t_{s_{1}s_{2}}^{Jb\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{2}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{2}}\rangle = -\sum_{\bar{j}\bar{b}}t_{s_{1}}^{I\bar{s}_{2}}X_{\bar{j}\bar{b}}t_{\bar{j}s_{1}}^{J\bar{b}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{js_{2}}^{b\bar{s}_{1}}\rangle = -\sum_{jb}t_{s_{2}}^{I\bar{s}_{1}}X_{jb}t_{js_{2}}^{Jb\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{js_{2}}^{\bar{s}_{1}\bar{s}_{2}}\rangle = +\sum_{j}t_{s_{2}}^{I\bar{s}_{1}}X_{j\bar{s}_{2}}t_{js_{2}}^{J\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{s_{2}s_{1}}^{b\bar{s}_{1}}\rangle = +\sum_{b}t_{s_{2}}^{I\bar{s}_{1}}X_{s_{1}b}t_{s_{2}s_{1}}^{Jb\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{1}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{1}}\rangle = -\sum_{\bar{j}\bar{b}}t_{s_{2}}^{I\bar{s}_{1}}X_{\bar{j}\bar{b}}t_{\bar{j}s_{2}}^{J\bar{b}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{js_{1}}^{b\bar{s}_{1}}\rangle = -\sum_{jb}t_{s_{1}}^{I\bar{s}_{1}}X_{jb}t_{js_{1}}^{Jb\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = -\sum_{j}t_{s_{1}}^{I\bar{s}_{1}}X_{j\bar{s}_{2}}t_{js_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{s_{2}s_{1}}^{b\bar{s}_{1}}\rangle = -\sum_{b}t_{s_{1}}^{I\bar{s}_{1}}X_{s_{2}b}t_{s_{2}s_{1}}^{Jb\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{s}_{1}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{1}}\rangle = -\sum_{\bar{j}\bar{b}}t_{s_{1}}^{I\bar{s}_{1}}X_{\bar{j}\bar{b}}t_{\bar{j}s_{1}}^{J\bar{b}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{js_{2}}^{b\bar{s}_{2}}\rangle = -\sum_{jb}t_{s_{2}}^{I\bar{s}_{2}}X_{jb}t_{js_{2}}^{Jb\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{js_{2}}^{\bar{s}_{1}\bar{s}_{2}}\rangle = -\sum_{j}t_{s_{2}}^{I\bar{s}_{2}}X_{j\bar{s}_{1}}t_{js_{2}}^{J\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{s_{1}s_{2}}^{b\bar{s}_{2}}\rangle = -\sum_{b}t_{s_{2}}^{I\bar{s}_{2}}X_{s_{1}b}t_{s_{1}s_{2}}^{Jb\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{s}_{2}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{2}}\rangle = -\sum_{\bar{j}\bar{b}}t_{s_{2}}^{I\bar{s}_{2}}X_{\bar{j}\bar{b}}t_{\bar{j}s_{2}}^{J\bar{b}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{js_{1}}^{b\bar{s}_{1}}\rangle = +\sum_{ib}t_{i}^{I\bar{s}_{1}}X_{s_{1}b}t_{is_{1}}^{Jb\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{js_{2}}^{b\bar{s}_{1}}\rangle = +\sum_{ib}t_{i}^{I\bar{s}_{1}}X_{s_{2}b}t_{is_{2}}^{Jb\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{js_{2}}^{\bar{s}_{1}\bar{s}_{2}}\rangle = -\sum_{i}t_{i}^{I\bar{s}_{1}}X_{s_{2}\bar{s}_{2}}t_{is_{2}}^{J\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{1}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = +\sum_{i}t_{i}^{I\bar{s}_{1}}X_{s_{1}\bar{s}_{2}}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{2}}\vert\Phi_{js_{2}}^{b\bar{s}_{2}}\rangle = +\sum_{ib}t_{i}^{I\bar{s}_{2}}X_{s_{2}b}t_{is_{2}}^{Jb\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{2}}\vert\Phi_{js_{1}}^{b\bar{s}_{2}}\rangle = +\sum_{ib}t_{i}^{I\bar{s}_{2}}X_{s_{1}b}t_{is_{1}}^{Jb\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{2}}\vert\Phi_{js_{2}}^{\bar{s}_{1}\bar{s}_{2}}\rangle = +\sum_{i}t_{i}^{I\bar{s}_{2}}X_{s_{2}\bar{s}_{1}}t_{is_{2}}^{J\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{i}^{\bar{s}_{2}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = -\sum_{i}t_{i}^{I\bar{s}_{2}}X_{s_{1}\bar{s}_{1}}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{a}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{1}}\rangle = +\sum_{\bar{j}\bar{a}}t_{s_{1}}^{I\bar{a}}X_{\bar{j}\bar{s}_{1}}t_{\bar{j}s_{1}}^{J\bar{a}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}}^{\bar{a}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{2}}\rangle = +\sum_{\bar{j}\bar{a}}t_{s_{1}}^{I\bar{a}}X_{\bar{j}\bar{s}_{2}}t_{\bar{j}s_{1}}^{J\bar{a}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{a}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{2}}\rangle = +\sum_{\bar{j}\bar{a}}t_{s_{2}}^{I\bar{a}}X_{\bar{j}\bar{s}_{2}}t_{\bar{j}s_{2}}^{J\bar{a}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}}^{\bar{a}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{1}}\rangle = +\sum_{\bar{j}\bar{a}}t_{s_{2}}^{I\bar{a}}X_{\bar{j}\bar{s}_{1}}t_{\bar{j}s_{2}}^{J\bar{a}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{1}}\vert\Phi_{js_{1}}^{b\bar{s}_{1}}\rangle = +\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{is_{1}}^{Ja\bar{s}_{1}} +\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{1}}X_{GS}t_{is_{1}}^{Ja\bar{s}_{1}} -\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{1}}X_{s_{1}s_{1}}t_{is_{1}}^{Ja\bar{s}_{1}} -\sum_{ija}t_{is_{1}}^{Ia\bar{s}_{1}}X_{ji}t_{js_{1}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{1}}\vert\Phi_{js_{1}}^{b\bar{s}_{2}}\rangle = +\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{2}}t_{is_{1}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{1}}\vert\Phi_{js_{2}}^{b\bar{s}_{1}}\rangle = -\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{1}}X_{s_{2}s_{1}}t_{is_{2}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{1}}\vert\Phi_{s_{2}s_{1}}^{b\bar{s}_{1}}\rangle = -\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{1}}X_{s_{2}i}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{2}}\vert\Phi_{js_{2}}^{b\bar{s}_{2}}\rangle = +\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{is_{2}}^{Ja\bar{s}_{2}} +\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{2}}X_{GS}t_{is_{2}}^{Ja\bar{s}_{2}} -\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{2}}X_{s_{2}s_{2}}t_{is_{2}}^{Ja\bar{s}_{2}} -\sum_{ija}t_{is_{2}}^{Ia\bar{s}_{2}}X_{ji}t_{js_{2}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{2}}\vert\Phi_{js_{1}}^{b\bar{s}_{2}}\rangle = -\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{2}}X_{s_{1}s_{2}}t_{is_{1}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{2}}\vert\Phi_{js_{2}}^{b\bar{s}_{1}}\rangle = +\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{1}}t_{is_{2}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{2}}\vert\Phi_{s_{1}s_{2}}^{b\bar{s}_{2}}\rangle = -\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{2}}X_{s_{1}i}t_{s_{1}s_{2}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{2}}\vert\Phi_{js_{1}}^{b\bar{s}_{2}}\rangle = +\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{is_{1}}^{Ja\bar{s}_{2}} +\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{2}}X_{GS}t_{is_{1}}^{Ja\bar{s}_{2}} -\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{2}}X_{s_{1}s_{1}}t_{is_{1}}^{Ja\bar{s}_{2}} -\sum_{ija}t_{is_{1}}^{Ia\bar{s}_{2}}X_{ji}t_{js_{1}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{2}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = -\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{2}}X_{a\bar{s}_{1}}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{a\bar{s}_{2}}\vert\Phi_{s_{1}s_{2}}^{b\bar{s}_{2}}\rangle = +\sum_{ia}t_{is_{1}}^{Ia\bar{s}_{2}}X_{s_{2}i}t_{s_{1}s_{2}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{1}}\vert\Phi_{js_{2}}^{b\bar{s}_{1}}\rangle = +\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{is_{2}}^{Ja\bar{s}_{1}} +\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{1}}X_{GS}t_{is_{2}}^{Ja\bar{s}_{1}} -\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{1}}X_{s_{2}s_{2}}t_{is_{2}}^{Ja\bar{s}_{1}} -\sum_{ija}t_{is_{2}}^{Ia\bar{s}_{1}}X_{ji}t_{js_{2}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{1}}\vert\Phi_{js_{2}}^{\bar{s}_{1}\bar{s}_{2}}\rangle = -\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{1}}X_{a\bar{s}_{2}}t_{is_{2}}^{J\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{a\bar{s}_{1}}\vert\Phi_{s_{2}s_{1}}^{b\bar{s}_{1}}\rangle = +\sum_{ia}t_{is_{2}}^{Ia\bar{s}_{1}}X_{s_{1}i}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{\bar{s}_{1}\bar{s}_{2}}\vert\Phi_{js_{2}}^{\bar{s}_{1}\bar{s}_{2}}\rangle = +\sum_{i}t_{is_{2}}^{I\bar{s}_{1}\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{is_{2}}^{J\bar{s}_{1}\bar{s}_{2}} +\sum_{i}t_{is_{2}}^{I\bar{s}_{1}\bar{s}_{2}}X_{GS}t_{is_{2}}^{J\bar{s}_{1}\bar{s}_{2}} -\sum_{i}t_{is_{2}}^{I\bar{s}_{1}\bar{s}_{2}}X_{s_{2}s_{2}}t_{is_{2}}^{J\bar{s}_{1}\bar{s}_{2}} -\sum_{ij}t_{is_{2}}^{I\bar{s}_{1}\bar{s}_{2}}X_{ji}t_{js_{2}}^{J\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{2}}^{\bar{s}_{1}\bar{s}_{2}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = +\sum_{i}t_{is_{2}}^{I\bar{s}_{1}\bar{s}_{2}}X_{s_{1}s_{2}}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{is_{1}}^{\bar{s}_{2}\bar{s}_{1}}\vert\Phi_{js_{1}}^{\bar{s}_{2}\bar{s}_{1}}\rangle = +\sum_{i}t_{is_{1}}^{I\bar{s}_{2}\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} +\sum_{i}t_{is_{1}}^{I\bar{s}_{2}\bar{s}_{1}}X_{GS}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} -\sum_{i}t_{is_{1}}^{I\bar{s}_{2}\bar{s}_{1}}X_{s_{1}s_{1}}t_{is_{1}}^{J\bar{s}_{2}\bar{s}_{1}} -\sum_{ij}t_{is_{1}}^{I\bar{s}_{2}\bar{s}_{1}}X_{ji}t_{js_{1}}^{J\bar{s}_{2}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}s_{2}}^{a\bar{s}_{2}}\vert\Phi_{s_{1}s_{2}}^{b\bar{s}_{2}}\rangle = +\sum_{a}t_{s_{1}s_{2}}^{Ia\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{s_{1}s_{2}}^{Ja\bar{s}_{2}} +\sum_{a}t_{s_{1}s_{2}}^{Ia\bar{s}_{2}}X_{GS}t_{s_{1}s_{2}}^{Ja\bar{s}_{2}} -\sum_{a}t_{s_{1}s_{2}}^{Ia\bar{s}_{2}}X_{s_{2}s_{2}}t_{s_{1}s_{2}}^{Ja\bar{s}_{2}} -\sum_{a}t_{s_{1}s_{2}}^{Ia\bar{s}_{2}}X_{s_{1}s_{1}}t_{s_{1}s_{2}}^{Ja\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}s_{2}}^{a\bar{s}_{2}}\vert\Phi_{s_{2}s_{1}}^{b\bar{s}_{1}}\rangle = -\sum_{a}t_{s_{1}s_{2}}^{Ia\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{1}}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}s_{1}}^{a\bar{s}_{1}}\vert\Phi_{s_{2}s_{1}}^{b\bar{s}_{1}}\rangle = +\sum_{a}t_{s_{2}s_{1}}^{Ia\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} +\sum_{a}t_{s_{2}s_{1}}^{Ia\bar{s}_{1}}X_{GS}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} -\sum_{a}t_{s_{2}s_{1}}^{Ia\bar{s}_{1}}X_{s_{1}s_{1}}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} -\sum_{a}t_{s_{2}s_{1}}^{Ia\bar{s}_{1}}X_{s_{2}s_{2}}t_{s_{2}s_{1}}^{Ja\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{2}}^{\bar{a}\bar{s}_{2}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{2}}\rangle = +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{2}} +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{2}}X_{GS}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{2}} -\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{2}}X_{s_{2}s_{2}}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{2}} -\sum_{\bar{i}\bar{j}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{2}}X_{\bar{j}\bar{i}}t_{\bar{j}s_{2}}^{J\bar{a}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{2}}^{\bar{a}\bar{s}_{2}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{2}}\rangle = -\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{2}}X_{s_{1}s_{2}}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{2}}^{\bar{a}\bar{s}_{2}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{1}}\rangle = +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{1}}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{1}}^{\bar{a}\bar{s}_{1}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{1}}\rangle = +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{1}} +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{1}}X_{GS}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{1}} -\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{1}}X_{s_{1}s_{1}}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{1}} -\sum_{\bar{i}\bar{j}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{1}}X_{\bar{j}\bar{i}}t_{\bar{j}s_{1}}^{J\bar{a}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{1}}^{\bar{a}\bar{s}_{1}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{2}}\rangle = +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{2}}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{1}}^{\bar{a}\bar{s}_{1}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{1}}\rangle = -\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{1}}X_{s_{2}s_{1}}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{1}}^{\bar{a}\bar{s}_{2}}\vert\Phi_{\bar{j}s_{1}}^{\bar{b}\bar{s}_{2}}\rangle = +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{2}} +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{2}}X_{GS}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{2}} -\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{2}}X_{s_{1}s_{1}}t_{\bar{i}s_{1}}^{J\bar{a}\bar{s}_{2}} -\sum_{\bar{i}\bar{j}\bar{a}}t_{\bar{i}s_{1}}^{I\bar{a}\bar{s}_{2}}X_{\bar{j}\bar{i}}t_{\bar{j}s_{1}}^{J\bar{a}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{\bar{i}s_{2}}^{\bar{a}\bar{s}_{1}}\vert\Phi_{\bar{j}s_{2}}^{\bar{b}\bar{s}_{1}}\rangle = +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{1}}X_{\bar{s}_{1}\bar{s}_{1}}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{1}} +\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{1}}X_{GS}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{1}} -\sum_{\bar{i}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{1}}X_{s_{2}s_{2}}t_{\bar{i}s_{2}}^{J\bar{a}\bar{s}_{1}} -\sum_{\bar{i}\bar{j}\bar{a}}t_{\bar{i}s_{2}}^{I\bar{a}\bar{s}_{1}}X_{\bar{j}\bar{i}}t_{\bar{j}s_{2}}^{J\bar{a}\bar{s}_{1}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{1}s_{2}}^{a\bar{s}_{2}}\vert\Phi_{\bar{j}s_{1}s_{2}}^{b\bar{s}_{1}\bar{s}_{2}}\rangle = -\sum_{\bar{j}a}t_{s_{1}s_{2}}^{Ia\bar{s}_{2}}X_{\bar{j}\bar{s}_{1}}t_{\bar{j}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*} 
+\begin{flalign*}
+&\langle\Phi_{s_{2}s_{1}}^{a\bar{s}_{1}}\vert\Phi_{\bar{j}s_{1}s_{2}}^{b\bar{s}_{1}\bar{s}_{2}}\rangle = -\sum_{\bar{j}a}t_{s_{2}s_{1}}^{Ia\bar{s}_{1}}X_{\bar{j}\bar{s}_{2}}t_{\bar{j}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} &
+\end{flalign*}
+\begin{flalign*}
+& \langle\Phi_{\bar{i}s_{1}s_{2}}^{a\bar{s}_{1}\bar{s}_{2}}\vert\Phi_{\bar{j}s_{1}s_{2}}^{b\bar{s}_{1}\bar{s}_{2}}\rangle = +\sum_{\bar{i}a}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{GS}t_{\bar{i}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} -\sum_{\bar{i}a}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{s_{2}s_{2}}t_{\bar{i}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} -\sum_{\bar{i}a}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{s_{1}s_{1}}t_{\bar{i}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} -\sum_{\bar{i}\bar{j}a}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{\bar{j}\bar{i}}t_{\bar{j}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} & \\ &+\sum_{\bar{i}ab}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{ab}t_{\bar{i}s_{1}s_{2}}^{Jb\bar{s}_{1}\bar{s}_{2}} +\sum_{\bar{i}a}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{\bar{s}_{1}\bar{s}_{1}}t_{\bar{i}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}} +\sum_{\bar{i}a}t_{\bar{i}s_{1}s_{2}}^{Ia\bar{s}_{1}\bar{s}_{2}}X_{\bar{s}_{2}\bar{s}_{2}}t_{\bar{i}s_{1}s_{2}}^{Ja\bar{s}_{1}\bar{s}_{2}}&
+\end{flalign*} 
+\end{document}
