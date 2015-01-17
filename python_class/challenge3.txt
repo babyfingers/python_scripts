@@ -1,0 +1,462 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Home | Department of Chemistry</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="/sites/www.chem.upenn.edu/files/pennchemistry_favicon.ico" type="image/x-icon" />
+  <link type="text/css" rel="stylesheet" media="all" href="/modules/aggregator/aggregator.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/node/node.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/defaults.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system-menus.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/user/user.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/cck/theme/content-module.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/ctools/css/ctools.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/date/date.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/date/date_popup/themes/datepicker.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/filefield/filefield.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/panels/css/panels.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/cck/modules/fieldgroup/fieldgroup.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/views/css/views.css?5" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/www.chem.upenn.edu/themes/zen/layouts/one_sidebar_second/one-sidebar-second.css?5" />
+<link type="text/css" rel="stylesheet" media="screen" href="/sites/www.chem.upenn.edu/files/less/sites/www.chem.upenn.edu/themes/pennchemistry/css/master.css?5" />
+<link type="text/css" rel="stylesheet" media="print" href="/sites/www.chem.upenn.edu/themes/pennchemistry/css/print.css?5" />
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" media="all" href="/sites/www.chem.upenn.edu/themes/pennchemistry/css/ie.css?5" />
+<![endif]-->
+<!--[if lte IE 6]>
+<link type="text/css" rel="stylesheet" media="all" href="/sites/www.chem.upenn.edu/themes/pennchemistry/css/ie6.css?5" />
+<![endif]-->
+  <script type="text/javascript" src="/misc/jquery.js?5"></script>
+<script type="text/javascript" src="/misc/drupal.js?5"></script>
+<script type="text/javascript" src="/sites/all/modules/panels/js/panels.js?5"></script>
+<script type="text/javascript" src="/sites/www.chem.upenn.edu/themes/pennchemistry/js/jquery.cycle.js?5"></script>
+<script type="text/javascript" src="/sites/www.chem.upenn.edu/themes/pennchemistry/js/application.js?5"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/", "googleanalytics": { "trackOutgoing": 1, "trackMailto": 1, "trackDownload": 1, "trackDownloadExtensions": "7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip" } });
+//--><!]]>
+</script>
+</head>
+<body class="front not-logged-in no-sidebars page-panels">
+
+      <div id="skip-link"><a href="#main-menu">Jump to Navigation</a></div>
+  
+  <div id="page-wrapper"><div id="page">
+
+    <div id="header"><div class="section clearfix">
+
+              <a href="/" title="Home" rel="home" id="logo"><img src="/sites/www.chem.upenn.edu/files/pennchemistry_logo.png" alt="Home" /></a>
+      
+              <div id="name-and-slogan">
+                                    <div id="site-name"><strong>
+                <a href="/" title="Home" rel="home"><span>Department of Chemistry</span></a>
+              </strong></div>
+                      
+                  </div> <!-- /#name-and-slogan -->
+      
+      
+      <div class="region region-header">
+  <div id="block-menu-menu-upenn-header" class="block block-menu region-odd even region-count-1 count-2">
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first"><a href="http://www.upenn.edu/" title="">University of Pennsylvania</a></li>
+<li class="leaf"><a href="http://www.sas.upenn.edu/" title="">School of Arts and Sciences</a></li>
+<li class="leaf"><a href="http://www.upenn.edu/penna-z/" title="">Penn A-Z</a></li>
+<li class="leaf last"><a href="http://www.upenn.edu/cgi-bin/calendar/calendar?school=9&amp;view=longmonth" title="">Penn Calendar</a></li>
+</ul>  </div>
+
+  </div> <!-- /.block -->
+<div id="block-search-0" class="block block-search region-even odd region-count-2 count-3">
+  
+  <div class="content">
+    <form action="/"  accept-charset="UTF-8" method="post" id="search-block-form">
+<div><div class="container-inline">
+  <div class="form-item" id="edit-search-block-form-1-wrapper">
+ <label for="edit-search-block-form-1">Search this site: </label>
+ <input type="text" maxlength="128" name="search_block_form" id="edit-search-block-form-1" size="15" value="" title="Enter the terms you wish to search for." class="form-text" />
+</div>
+<input type="submit" name="op" id="edit-submit" value="Search"  class="form-submit" />
+<input type="hidden" name="form_build_id" id="form-tEnwFHxUpTIBEIIvwsCF7HMHnG2Q3To4XpFLex073A4" value="form-tEnwFHxUpTIBEIIvwsCF7HMHnG2Q3To4XpFLex073A4"  />
+<input type="hidden" name="form_id" id="edit-search-block-form" value="search_block_form"  />
+</div>
+
+</div></form>
+  </div>
+
+  </div> <!-- /.block -->
+</div> <!-- /.region -->
+
+    </div></div> <!-- /.section, /#header -->
+
+    <div id="main-wrapper"><div id="main" class="clearfix with-navigation">
+
+      <div id="content" class="column"><div class="section">
+
+        
+        
+                          <h1 class="title">Home</h1>
+                                
+        
+        <div id="content-area">
+          
+<div class="panel-display zen-one-sidebar-second clearfix" >
+
+  <div class="panel-content"><div class="panel-content-inner inside panel-panel">
+    <div class="panel-pane pane-block pane-views-homepage-carousel-block-1" >
+  
+  
+  
+  <div class="pane-content">
+    
+<div class="view view-homepage-carousel view-id-homepage_carousel view-display-id-block_1 landing-carousel flexislider view-dom-id-1 view-homepage-carousel view-id-homepage_carousel view-display-id-block_1 view-dom-id-1 landing-carousel flexislider">
+  
+  
+  
+  
+      <div class="view-content">
+      <div class="item-list">
+    <ul>
+          <li class="views-row views-row-1 views-row-odd views-row-first">  
+  <div class="views-field-field-link-url">
+                <span class="field-content"></span>
+  </div>
+  
+  <div class="views-field-field-image-fid">
+                <span class="field-content"><a href=""><img src="https://www.chem.upenn.edu/sites/www.chem.upenn.edu/files/imagecache/homepage_slider/penncas-theme-full.jpg" alt="" title=""  class="imagecache imagecache-homepage_slider imagecache-default imagecache-homepage_slider_default" width="640" height="426" /></a></span>
+  </div>
+  
+  <div class="views-field-nothing">
+                <span class="field-content"></span>
+  </div>
+</li>
+          <li class="views-row views-row-2 views-row-even">  
+  <div class="views-field-field-link-url">
+                <span class="field-content"></span>
+  </div>
+  
+  <div class="views-field-field-image-fid">
+                <span class="field-content"><a href=""><img src="https://www.chem.upenn.edu/sites/www.chem.upenn.edu/files/imagecache/homepage_slider/Schelter_reprint2_0.png" alt="" title=""  class="imagecache imagecache-homepage_slider imagecache-default imagecache-homepage_slider_default" width="640" height="426" /></a></span>
+  </div>
+  
+  <div class="views-field-nothing">
+                <span class="field-content"></span>
+  </div>
+</li>
+          <li class="views-row views-row-3 views-row-odd">  
+  <div class="views-field-field-link-url">
+                <span class="field-content"></span>
+  </div>
+  
+  <div class="views-field-field-image-fid">
+                <span class="field-content"><a href=""><img src="https://www.chem.upenn.edu/sites/www.chem.upenn.edu/files/imagecache/homepage_slider/biological.jpg" alt="" title=""  class="imagecache imagecache-homepage_slider imagecache-default imagecache-homepage_slider_default" width="640" height="426" /></a></span>
+  </div>
+  
+  <div class="views-field-nothing">
+                <span class="field-content"></span>
+  </div>
+</li>
+          <li class="views-row views-row-4 views-row-even">  
+  <div class="views-field-field-link-url">
+                <span class="field-content"></span>
+  </div>
+  
+  <div class="views-field-field-image-fid">
+                <span class="field-content"><a href=""><img src="https://www.chem.upenn.edu/sites/www.chem.upenn.edu/files/imagecache/homepage_slider/mmj-lecture-2013-wipf.JPG" alt="" title=""  class="imagecache imagecache-homepage_slider imagecache-default imagecache-homepage_slider_default" width="640" height="426" /></a></span>
+  </div>
+  
+  <div class="views-field-nothing">
+                <span class="field-content"></span>
+  </div>
+</li>
+          <li class="views-row views-row-5 views-row-odd views-row-last">  
+  <div class="views-field-field-link-url">
+                <span class="field-content"></span>
+  </div>
+  
+  <div class="views-field-field-image-fid">
+                <span class="field-content"><a href=""><img src="https://www.chem.upenn.edu/sites/www.chem.upenn.edu/files/imagecache/homepage_slider/axalta-lecture-2013-title.jpg" alt="" title=""  class="imagecache imagecache-homepage_slider imagecache-default imagecache-homepage_slider_default" width="640" height="426" /></a></span>
+  </div>
+  
+  <div class="views-field-nothing">
+                <span class="field-content"></span>
+  </div>
+</li>
+      </ul>
+</div>    </div>
+  
+  
+  
+  
+  
+  
+</div> <!-- /.view -->
+  </div>
+
+  
+  </div>
+<div class="panel-region-separator"></div><div class="panel-pane pane-block pane-block-1" >
+  
+      <h2 class="pane-title">Welcome to Penn Chemistry</h2>
+  
+  
+  <div class="pane-content">
+    <p>Penn Chemistry is composed of a dynamic community of researchers creating and disseminating new knowledge at the forefront of the chemical sciences. As an enabling science, chemistry is at the focal point of every important modern societal challenge. Our faculty and students engage these challenges daily on a local, national, and international scale.</p><p>&nbsp;</p><p><a href="https://twitter.com/PennChemistry"><img src="/sites/www.chem.upenn.edu/files/uploads/twitter_32.png" alt="Twitter" width="32" height="32" /></a>&nbsp;<a href="http://www.linkedin.com/groups?mostPopular=&amp;gid=2254948"><img src="/sites/www.chem.upenn.edu/files/uploads/linkedin_32.png" alt="LinkedIn" width="32" height="32" /></a>&nbsp;<a href="https://www.facebook.com/groups/61311255924/"><img src="/sites/www.chem.upenn.edu/files/uploads/facebook_32.png" alt="Facebook" width="32" height="32" /></a></p>  </div>
+
+  
+  </div>
+<div class="panel-region-separator"></div><div class="panel-pane pane-block pane-views-events-block-1" >
+  
+      <h2 class="pane-title">Events</h2>
+  
+  
+  <div class="pane-content">
+    
+<div class="view view-events view-id-events view-display-id-block_1 events-list-block view-dom-id-2 view-events view-id-events view-display-id-block_1 view-dom-id-2 events-list-block">
+  
+  
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first">
+      
+  <div class="views-field-field-date-value">
+                <div class="field-content">
+<div class="datebox">
+
+<div class="month"><span class="date-display-single">Aug</span></div>
+<div class="year"><span class="date-display-single">28</span></div>
+
+</div></div>
+  </div>
+  
+  <div class="views-field-title">
+                <span class="field-content"><a href="/event/2014/08/physical-chemistry-seminar-david-moore-lehigh-u">Physical Chemistry Seminar (David Moore, Lehigh U )</a></span>
+  </div>
+  
+  <div class="views-field-teaser">
+                <div class="field-content"><p>Inquiries Please contact Rosa Vargas <a href="mailto:rvargas@sas.upenn.edu">rvargas@sas.upenn.edu</a></p></div>
+  </div>
+  </div>
+  <div class="views-row views-row-2 views-row-even">
+      
+  <div class="views-field-field-date-value">
+                <div class="field-content">
+<div class="datebox">
+
+<div class="month"><span class="date-display-single">Sep</span></div>
+<div class="year"><span class="date-display-single">10</span></div>
+
+</div></div>
+  </div>
+  
+  <div class="views-field-title">
+                <span class="field-content"><a href="/event/2014/09/trost-lecture-larry-overman-uc-irvine">Trost Lecture (Larry Overman, UC Irvine)</a></span>
+  </div>
+  </div>
+  <div class="views-row views-row-3 views-row-odd views-row-last">
+      
+  <div class="views-field-field-date-value">
+                <div class="field-content">
+<div class="datebox">
+
+<div class="month"><span class="date-display-single">Sep</span></div>
+<div class="year"><span class="date-display-single">15</span></div>
+
+</div></div>
+  </div>
+  
+  <div class="views-field-title">
+                <span class="field-content"><a href="/event/2014/09/joanna-fowler-brookhaven-trustees-council-penn-women-lecture">Joanna Fowler, Brookhaven; Trustees&#039; Council of Penn Women Lecture</a></span>
+  </div>
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div> <!-- /.view -->
+  </div>
+
+  
+  </div>
+  </div></div> <!-- /.panel-content-inner, /.panel-content -->
+
+  <div class="panel-sidebar-first"><div class="panel-sidebar-first-inner inside panel-panel">
+    <div class="panel-pane pane-block pane-views-news-block-1" >
+  
+      <h2 class="pane-title">News</h2>
+  
+  
+  <div class="pane-content">
+    
+<div class="view view-news view-id-news view-display-id-block_1 news-list-block view-dom-id-3 view-news view-id-news view-display-id-block_1 view-dom-id-3 news-list-block">
+  
+  
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="/news-item/2014/08/gary-molander-wins-acs-national-award">Gary Molander wins ACS National Award</a></span>
+  </div>
+  
+  <div class="views-field-teaser">
+                <div class="field-content"><p>Gary A. Molander, Hirschmann-Makineni Professor and Chemistry Department Chair, has been...</div>
+  </div>
+  </div>
+  <div class="views-row views-row-2 views-row-even">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="/news-item/2014/08/penn-chemistry-hosts-first-aces-event">Penn Chemistry hosts first ACES Event</a></span>
+  </div>
+  
+  <div class="views-field-teaser">
+                <div class="field-content"><p>The inaugural ACES Program was held on July 19th. The program, which is designed to run several...</div>
+  </div>
+  </div>
+  <div class="views-row views-row-3 views-row-odd">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="/news-item/2014/08/feng-gai-receive-acs-section-award">Feng Gai to Receive ACS Section Award</a></span>
+  </div>
+  
+  <div class="views-field-teaser">
+                <div class="field-content"><p>Feng Gai has been selected to receive the 2014 American Chemical Society Philadelphia Section...</div>
+  </div>
+  </div>
+  <div class="views-row views-row-4 views-row-even views-row-last">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="/news-item/2014/07/amos-smith-honored-acs">Amos Smith Honored by ACS</a></span>
+  </div>
+  
+  <div class="views-field-teaser">
+                <div class="field-content"><p>Amos B. Smith, III, Rhodes-Thompson Professor of Chemistry has been named the winner of the...</div>
+  </div>
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div> <!-- /.view -->
+  </div>
+
+  
+  </div>
+<div class="panel-region-separator"></div><div class="panel-pane pane-block pane-block-3" >
+  
+      <h2 class="pane-title">Research Highlight</h2>
+  
+  
+  <div class="pane-content">
+    <div>
+<div>
+<div>
+<div>
+<div><img src="/sites/www.chem.upenn.edu/files/uploads/saven.jpg" alt="Saven" width="250" height="350" /></div>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Jeff Saven is one of several Penn&nbsp;researchers leading an effort to create an artificial chemical sensor that is critical in the action of painkillers and anesthetics. Receptors in these sensors produce an electrical response that can then be read out by a computer. This research shows a way to mass produce devices that could be useful in drug development and a variety of diagnostic tests.&nbsp;</p>
+<p>&nbsp;</p>
+<p>This researdh effort is a University-wide project made possible through the Penn Nano/Bio Interface Center (NBIC), which brings together investigators from the Schools of Engineering and Applied Science; Arts and Sciences; and Medicine. Read more about the project <a href="http://www.upenn.edu/pennnews/news/penn-research-combines-graphene-and-painkiller-receptor-scalable-chemical-sensor">here</a>.</p>
+<p>&nbsp;</p>  </div>
+
+
+Here's the number you call to get free sandwiches at the cafe: 215-555-3624
+  
+  </div>
+  </div></div> <!-- /.panel-sidebar-first-inner, /.panel-sidebar-first -->
+
+</div> <!-- /.zen-one-sidebar-second -->
+        </div>
+
+        <div class="region region-content-bottom">
+  <div id="block-block-6" class="block block-block region-odd odd region-count-1 count-1">
+  
+  <div class="content">
+    <p>Department of Chemistry</p>
+<p>231 S. 34 Street, Philadelphia, PA 19104-6323</p>
+<p>215.898.8317 voice | 215.573.2112 fax | <a href="mailto:web@chem.upenn.edu">web@chem.upenn.edu</a></p>  </div>
+
+  </div> <!-- /.block -->
+</div> <!-- /.region -->
+
+        
+      </div></div> <!-- /.section, /#content -->
+
+              <div id="navigation"><div class="section clearfix">
+
+          <ul id="main-menu" class="links clearfix"><li class="menu-234 active-trail first active"><a href="/" title="" class="active">Home</a></li>
+<li class="menu-695"><a href="/people">People</a></li>
+<li class="menu-835"><a href="/content/graduate" title="Graduate">Graduate</a></li>
+<li class="menu-237"><a href="/node/8" title="">Undergraduate</a></li>
+<li class="menu-837"><a href="/content/facilities" title="Facilities">Facilities</a></li>
+<li class="menu-239"><a href="/alumni" title="">Alumni</a></li>
+<li class="menu-841"><a href="/content/community" title="Community">Community</a></li>
+<li class="menu-725"><a href="/events-list">Events</a></li>
+<li class="menu-839"><a href="/content/about-penn-chemistry" title="About">About</a></li>
+<li class="menu-243"><a href="/news-list" title="">News</a></li>
+<li class="menu-842"><a href="/content/chemistry-business-office" title="Business Office">Business Office</a></li>
+<li class="menu-1519 last"><a href="/content/peptide-synthesis-order-form" title="Peptide Synthesis Order Form">peptide synthesis order form</a></li>
+</ul>
+          
+        </div></div> <!-- /.section, /#navigation -->
+      
+      
+      
+    </div></div> <!-- /#main, /#main-wrapper -->
+
+          <div id="footer"><div class="section">
+
+        
+Here are some random numbers: 1234545132498235897161612823904559239191727455 3459255955 5543334444
+        
+        <div class="region region-footer">
+  <div id="block-block-2" class="block block-block region-odd even region-count-1 count-4">
+  
+  <div class="content">
+    2012 The Trustees of the University of Pennsylvania  </div>
+
+  </div> <!-- /.block -->
+<div id="block-menu-menu-footer-links" class="block block-menu region-even odd region-count-2 count-5">
+  
+  <div class="content">
+    <ul class="menu"><li class="leaf first last"><a href="/user" title="">Department Login</a></li>
+</ul>  </div>
+
+  </div> <!-- /.block -->
+</div> <!-- /.region -->
+
+      </div></div> <!-- /.section, /#footer -->
+    
+  </div></div> <!-- /#page, /#page-wrapper -->
+
+Admissions (215)-555-3624
+  
+  <script type="text/javascript" src="/sites/all/modules/google_analytics/googleanalytics.js?5"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+try{var pageTracker = _gat._getTracker("UA-35248626-1");pageTracker._trackPageview();} catch(err) {}
+//--><!]]>
+</script>
+
+</body>
+</html>

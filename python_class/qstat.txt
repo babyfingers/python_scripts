@@ -1,0 +1,9 @@
+Job ID                    Name             User            Time Use S Queue
+------------------------- ---------------- --------------- -------- - -----
+582212.diabatical          wb97x-s1-opt.out ouqi            378:49:3 R batch          
+582344.diabatical          ...x-s1-opt.out1 ouqi            192:42:0 R batch          
+582345.diabatical          ...x-t1-opt.out1 ouqi            192:41:0 R batch          
+582426.diabatical          a.out            Wenjie          01:40:29 R batch          
+582428.diabatical          kohn_1.1.1_12    wenjun          114:57:0 R batch          
+582429.diabatical          ...6-31Gss.out02 alguire         01:26:21 R batch          
+582434.diabatical          ...gaB97XD.out04 alguire         01:49:45 C batch          

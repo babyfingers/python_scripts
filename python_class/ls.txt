@@ -1,0 +1,11 @@
+challenge1.txt
+challenge3.txt
+challenge3.txt~
+ls.txt
+qstat.txt
+regex_test.txt
+regex_test.txt~
+solution0.py
+solution0.py~
+solution1.py
+solved1.txt

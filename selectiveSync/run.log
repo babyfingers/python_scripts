@@ -1,0 +1,238 @@
+sending incremental file list
+testDir/
+
+sent 62 bytes  received 16 bytes  156.00 bytes/sec
+total size is 0  speedup is 0.00
+sending incremental file list
+okaytocopydir/
+
+sent 68 bytes  received 16 bytes  168.00 bytes/sec
+total size is 0  speedup is 0.00
+sending incremental file list
+file.txt
+
+sent 113 bytes  received 31 bytes  288.00 bytes/sec
+total size is 18  speedup is 0.12
+sending incremental file list
+docopy1/
+docopy1/myfile.txt
+
+sent 147 bytes  received 35 bytes  364.00 bytes/sec
+total size is 21  speedup is 0.12
+sending incremental file list
+test.txt
+
+sent 97 bytes  received 31 bytes  256.00 bytes/sec
+total size is 2  speedup is 0.02
+sending incremental file list
+donotcopy1/
+
+sent 65 bytes  received 16 bytes  162.00 bytes/sec
+total size is 0  speedup is 0.00
+***************************************************
+**************** STARTING RUN *********************
+***************************************************
+-------------------------------------------------
+Copying the top-level directory.
+-------------------------------------------------
+rsync -av --include='testDir' --exclude='testDir/*' testDir /data/home/alguire/inout_files/selectiveSync/backup/
+-------------------------------------------------
+Preparing a standardized list of skippable trees.
+-------------------------------------------------
+Now comparing elements of the following trees:
+iTree = ['donotcopy1', 'donotcopy2', 'donotcopy3']
+jTree = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Element 0 agrees!
+Element 1 does not agree!
+Now comparing elements of the following trees:
+iTree = ['donotcopy1', 'donotcopy2']
+jTree = ['donotcopy1', 'donotcopy2', 'donotcopy3']
+Element 0 agrees!
+Element 1 agrees!
+Awesome! We found a redundant tree, jTreeIndex = 0
+Now comparing elements of the following trees:
+iTree = ['donotcopy1', 'donotcopy2']
+jTree = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Element 0 agrees!
+Element 1 does not agree!
+Now comparing elements of the following trees:
+iTree = ['alsodonotcopy']
+jTree = ['donotcopy1', 'donotcopy2', 'donotcopy3']
+Element 0 does not agree!
+Now comparing elements of the following trees:
+iTree = ['alsodonotcopy']
+jTree = ['donotcopy1', 'donotcopy2']
+Element 0 does not agree!
+Now comparing elements of the following trees:
+iTree = ['alsodonotcopy']
+jTree = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Element 0 does not agree!
+Now comparing elements of the following trees:
+iTree = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+jTree = ['donotcopy1', 'donotcopy2', 'donotcopy3']
+Element 0 agrees!
+Element 1 does not agree!
+Redundant tree removed: ['donotcopy1', 'donotcopy2', 'donotcopy3']
+Remaining skippable trees:
+['donotcopy1', 'donotcopy2']
+['alsodonotcopy']
+['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+-------------------------------------------------
+Finally copying stuff.
+-------------------------------------------------
+===============================================
+Working on iTree = ['donotcopy1', 'donotcopy2']
+===============================================
+iPath = 
+allItems = ['donotcopy1', 'test.txt', 'docopy1', 'okaytocopydir', 'file.txt', 'alsodonotcopy']
+++++++++++++
+Running copyFilter
+++++++++++++
+Current tree of interest = ['donotcopy1', 'donotcopy2'] at depth = 0
+skipItemTreeList = [['donotcopy1', 'donotcopy2'], ['alsodonotcopy'], ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']]
+Do we care about this tree? ['donotcopy1', 'donotcopy2']
+Yuup! It looks like we have to pay attention.
+Do we care about this tree? ['alsodonotcopy']
+Yuup! It looks like we have to pay attention.
+Do we care about this tree? ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Yuup! It looks like we have to pay attention.
+avoidItems = ('alsodonotcopy',)
+directoryCopyOnly = ('donotcopy1',)
+copyItems = ['okaytocopydir', 'file.txt', 'docopy1', 'test.txt']
+copyDirectory = /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av okaytocopydir /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av file.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av docopy1 /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av test.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -avt --include='donotcopy1' --exclude='donotcopy1/*' donotcopy1 /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+iPath = donotcopy1
+allItems = ['donotcopy2', 'okay_to_copy_yeah', 'glarb.txt']
+++++++++++++
+Running copyFilter
+++++++++++++
+Current tree of interest = ['donotcopy1', 'donotcopy2'] at depth = 1
+skipItemTreeList = [['donotcopy1', 'donotcopy2'], ['alsodonotcopy'], ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']]
+Do we care about this tree? ['donotcopy1', 'donotcopy2']
+Yuup! It looks like we have to pay attention.
+Do we care about this tresending incremental file list
+glarb.txt
+
+sent 104 bytes  received 31 bytes  270.00 bytes/sec
+total size is 8  speedup is 0.06
+sending incremental file list
+okay_to_copy_yeah/
+
+sent 72 bytes  received 16 bytes  176.00 bytes/sec
+total size is 0  speedup is 0.00
+sending incremental file list
+
+sent 65 bytes  received 13 bytes  156.00 bytes/sec
+total size is 0  speedup is 0.00
+sending incremental file list
+
+sent 52 bytes  received 12 bytes  128.00 bytes/sec
+total size is 18  speedup is 0.28
+sending incremental file list
+
+sent 80 bytes  received 13 bytes  186.00 bytes/sec
+total size is 21  speedup is 0.23
+sending incremental file list
+
+sent 52 bytes  received 12 bytes  128.00 bytes/sec
+total size is 2  speedup is 0.03
+sending incremental file list
+donotcopy1/
+
+sent 65 bytes  received 16 bytes  162.00 bytes/sec
+total size is 0  speedup is 0.00
+sending incremental file list
+
+sent 53 bytes  received 12 bytes  130.00 bytes/sec
+total size is 8  speedup is 0.12
+sending incremental file list
+
+sent 69 bytes  received 13 bytes  164.00 bytes/sec
+total size is 0  speedup is 0.00
+e? ['alsodonotcopy']
+Nope! Can't be found in this directory (we're too deep).
+Do we care about this tree? ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Yuup! It looks like we have to pay attention.
+avoidItems = ('donotcopy2',)
+directoryCopyOnly = ('okay_to_copy_yeah',)
+copyItems = ['glarb.txt']
+copyDirectory = /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1
+rsync -av glarb.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1
+rsync -avt --include='okay_to_copy_yeah' --exclude='okay_to_copy_yeah/*' okay_to_copy_yeah /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1
+===============================================
+Working on iTree = ['alsodonotcopy']
+===============================================
+iPath = 
+allItems = ['donotcopy1', 'test.txt', 'docopy1', 'okaytocopydir', 'file.txt', 'alsodonotcopy']
+++++++++++++
+Running copyFilter
+++++++++++++
+Current tree of interest = ['alsodonotcopy'] at depth = 0
+skipItemTreeList = [['donotcopy1', 'donotcopy2'], ['alsodonotcopy'], ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']]
+Do we care about this tree? ['donotcopy1', 'donotcopy2']
+Yuup! It looks like we have to pay attention.
+Do we care about this tree? ['alsodonotcopy']
+Yuup! It looks like we have to pay attention.
+Do we care about this tree? ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Yuup! It looks like we have to pay attention.
+avoidItems = ('alsodonotcopy',)
+directoryCopyOnly = ('donotcopy1',)
+copyItems = ['okaytocopydir', 'file.txt', 'docopy1', 'test.txt']
+copyDirectory = /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av okaytocopydir /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av file.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av docopy1 /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -av test.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+rsync -avt --include='donotcopy1' --exclude='donotcopy1/*' donotcopy1 /data/home/alguire/inout_files/selectiveSync/backup/testDir/
+===============================================
+Working on iTree = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+===============================================
+iPath = donotcopy1
+allItems = ['donotcopy2', 'okay_to_copy_yeah', 'glarb.txt']
+++++++++++++
+Running copyFilter
+++++++++++++
+Current tree of interest = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt'] at depth = 1
+skipItemTreeList = [['donotcopy1', 'donotcopy2'], ['alsodonotcopy'], ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']]
+Do we care about this tree? ['donotcopy1', 'donotcopy2']
+Yuup! It looks like we have to pay attention.
+Do we care about this tree? ['alsodonotcopy']
+Nope! Can't be found in this directory (we're too deep).
+Do we care about this tree? ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Yuup! It looks like we have to pay attention.
+avoidItems = ('donotcopy2',)
+directoryCopyOnly = ('okay_to_copy_yeah',)
+copyItems = ['glarb.txt']
+copyDirectory = /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1
+rsync -av glarb.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1
+rsync -avt --include='okay_to_copy_yeah' --exclude='okay_to_copy_yeah/*' okay_to_copy_yeah /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1
+iPath = donotcopy1/okay_to_copy_yeah
+allItems = ['literallypoison.txt', 'totallynotpoison.txt']
+++++++++++++
+Running copyFilter
+++++++++++++
+Current tree of interest = ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt'] at depth = 2
+skipItemTreeList = [['donotcopy1', 'donotcopy2'], ['alsodonotcopy'], ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']]
+Do we care about this tree? ['donotcopy1', 'donotcopy2']
+Nope! Can't be found in this directory (we're too deep).
+Do we care about this tree? ['alsodonotcopy']
+Nope! Can't be found in this directory (we're too deep).
+Do we care about this tree? ['donotcopy1', 'okay_to_copy_yeah', 'literallypoison.txt']
+Yuup! It sending incremental file list
+totallynotpoison.txt
+
+sent 197 bytes  received 31 bytes  456.00 bytes/sec
+total size is 90  speedup is 0.39
+looks like we have to pay attention.
+avoidItems = ('literallypoison.txt',)
+directoryCopyOnly = ()
+copyItems = ['totallynotpoison.txt']
+copyDirectory = /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1/okay_to_copy_yeah
+rsync -av totallynotpoison.txt /data/home/alguire/inout_files/selectiveSync/backup/testDir/donotcopy1/okay_to_copy_yeah
+***************************************************
+**************** RUN COMPLETE *********************
+***************************************************
