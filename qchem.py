@@ -30,16 +30,41 @@ FCString   = "force_constant"
 RMString   = "reduced_mass"
 modeString = "vibrational_mode"
 
+kB        = 1.3806488*math.pow(10,-23) # in J/K
+hbar      = 1.054571726*math.pow(10,-34)
 A_to_Bohr = 1.889725989 #Number of Bohr radii in an Angstrom
+Bohr_to_A = 1.0/A_to_Bohr
 Bohr_to_m = 5.2917721092*math.pow(10,-11)
+m_to_A    = 10000000000.0
+A_to_m    = 1.0/m_to_A
+m_to_Bohr = 1.0/Bohr_to_m
 Har_to_J  = 4.35974434*math.pow(10,-18)
+J_to_Har  = 1.0/Har_to_J
+eV_to_J   = 1.602176565*math.pow(10,-19)
+J_to_eV   = 1.0/eV_to_J
+meV_to_J  = 0.001*eV_to_J
+J_to_meV  = 1.0/meV_to_J
+Har_to_eV = 27.21138505
+eV_to_Har = 1.0/Har_to_eV
+Har_to_meV= 1000*Har_to_eV
+meV_to_Har= 1.0/Har_to_meV
+au_to_s   = hbar/Har_to_J
+s_to_au   = 1.0/au_to_s
 SOL       = 299792458 #Speed of light, in m/s
 amu_to_kg = 1.666053892*math.pow(10,-27)
+au_to_kg  = 9.10938291*math.pow(10,-31)
+kg_to_au  = 1.0/au_to_kg
+amu_to_au = amu_to_kg*kg_to_au
 kg_to_amu = 1.0/amu_to_kg
+au_to_kg  = 1.0/kg_to_au
+au_to_amu = 1.0/amu_to_au
 m_to_cm   = 100
 cm_to_m   = 0.01
+N_to_mdyn = 100000000.0
+mdyn_to_N = 1.0/N_to_mdyn
 oneNano   = math.pow(10.0,-9)
 onePico   = math.pow(10.0,-12)
+
 muX = 0
 muY = 1
 muZ = 2
@@ -221,6 +246,10 @@ def getModeOverlap(mode1, mode2, elements, NAtom):
     overlap = np.dot(overlap,mode2)
     assert(overlap.shape==(1,1))
     return overlap[0][0]
+
+def getModePops(temp_K, freqs_invcm):
+    expArgs = hbar*freqs_invcm*2*math.pi*SOL*m_to_cm/(kB*temp_K)
+    return np.array([1.0/(math.exp(myExpArg)-1) for myExpArg in expArgs])
 
 def geometryToString(elements, geometry):
     '''Return a string that works as a properly
