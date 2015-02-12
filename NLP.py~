@@ -1,5 +1,6 @@
 import re
 import os
+import math
 
 word_re = re.compile("\W?(\w+)\W?")
 
@@ -24,3 +25,39 @@ def load_collection_tokens(myDirectory):
     for myFilePath in fileList:
         allTokens.extend(load_file_tokens(myFilePath))
     return allTokens
+
+def get_flatlist(itemlist):
+    return [item for source, sourceitems in itemlist for item in sourceitems]
+
+def get_types(flatlist):
+    return tuple(sorted(list[set(flatlist)]))
+
+def get_tf(flatlist):
+    #Remember, itemlist is a set of tuples identifying
+    # first the source, then a list of items from that
+    # source
+    types = get_types(flatlist)
+    histogram = [0]*len(types)
+    for iii, iType in enumerate(types):
+        histogram[iii] = flatlist.count(iType)
+    normFac = 1.0/max(histogram)
+    tfDict = {}
+    for iii, iType in enumerate(types):
+        tfDict[iType] = histogram[iii]*normFac
+    return tfDict
+
+def get_idf(itemlist):
+    flatlist = get_flatlist(itemlist)
+    types = get_types(flatlist)
+    idf = {}
+    NDoc = len(itemlist)
+    for iii, iType in enumerate(types):
+        count = 0
+        for docList in itemlist:
+            if iType in docList[1]:
+                count += 1
+        idf[iType] = math.log((1.0*NDoc)/count)
+    return idf
+
+
+    
