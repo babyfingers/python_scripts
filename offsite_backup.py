@@ -13,8 +13,8 @@ import os
 import sys
 from datetime import datetime as dt
 
-# Define some functions
 def readfile(filename):
+    #Convert a file into text
     f = open(filename,"r")
     fs = f.read()
     f.close()
@@ -31,9 +31,6 @@ def getSizeOnDisk(path):
     os.remove(tmpfile)
     l = duSize_re.findall(fs)
     return int(l[0])*1024
-
-#target = raw_input("What directory would you like the size of?\n")
-#print "size = {} bytes".format(getSizeOnDisk(target))
 
 def writeList(write_string, write_to):
     has_error = False
@@ -94,10 +91,6 @@ def backupPaths(paths,username):
     os.chdir("/data/home")
     for path in paths:
         path = path.replace("/data/home/","")
-        #Given a path that you want to back up [...]
-        #command = "rsync -avR --log-file='/data/home/amber/backup/rsync.log' {} backup@romulus:'/Volumes/My\ Passport\ for\ Mac/amber'".format(myPath)
-        #command = "rsync -avR --log-file='/data/home/amber/backup/rsync.log' {} backup@romulus:''".format(path)
-        #command = "rsync -avR {} /data/home/alguire/backup_test/{}".format(path,username)
         command = "rsync -avR --log-file='{}' {} backup@romulus:'diabatical'".format(os.path.join(script_path,"rsync.log"),path)
         print command
         os.system(command)
@@ -128,7 +121,6 @@ def openFile(filePath,write_out,willWrite):
 
 # Set up log files
 os.chdir("/data/home/")
-
 tm0 = dt.now()
 mainLogPath = os.path.join(script_path,"main_backup_log_{}-{}-{}.txt".format(tm0.year,tm0.month,tm0.day))
 
@@ -163,9 +155,7 @@ def do_backup(bupFilePath,write_list,username,mem_max):
         result_str = "complete"
     return result_str
 
-# (start loop over users)
 user_list = [u for u in os.listdir("/data/home/") if os.path.isdir(u)]
-#user_list = ["alguire"]
 user_limits = {}
 for u in user_list:
     user_limits[u] = 10000000000 #10 GB
@@ -193,11 +183,11 @@ for username in user_list:
         writeList("\t"+locLogPath,write_list)
         writeList("Please move this file if you would like a local log of the backup.\n",write_list)
     else:
-        #write_list = [mainLogFile,locLogFile]
-        #writeList("\n\n",locLogFile)
+        write_list = [mainLogFile,locLogFile]
+        writeList("\n\n",locLogFile)
         writeList("********************************************************\n",write_list)
         writeList("******* offsite_backup v{}, {}-{:02d}-{:02d} {:02d}:{:02d}:{:02d} *******\n".format(vers,t0.year,t0.month,t0.day,t0.hour,t0.minute,t0.second),write_list)
-    os.system("chmod o+r "+locLogPath)
+    os.system("chown {} {}".format(username,locLogPath))
 
     #Look for the file that will tell us what to back up
     bupFile = openFile(bupFilePath,write_list,False)
