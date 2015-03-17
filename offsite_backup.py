@@ -6,7 +6,7 @@
 # checking that each directory is legit and the total size does
 # not exceed some designated amount.
 
-vers = 0.1
+vers = 0.2
 
 import re
 import os
