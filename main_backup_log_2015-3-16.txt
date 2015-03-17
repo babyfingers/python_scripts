@@ -1,0 +1,32 @@
+
+
+Now working on user alguire
+********************************************************
+******* offsite_backup v0.1, 2015-03-16 12:21:39 *******
+Maximum backup size for user alguire is 10000000 bytes.
+Contents of /data/home/alguire/backup_please:
+--------------------------------------------------------
+#Comment test
+/data/home/alguire/inout_files/python
+/data/home/alguire/bin #comment test
+/data/home/alguire/bing #Fail test
+/data/home/subotnik
+
+#booyah
+
+--------------------------------------------------------
+    ++ERROR++
+Problem with path = /data/home/alguire/bing
+I can't find it. Skipping.
+    +++++++++
+    ++ERROR++
+Problem with path = /data/home/subotnik
+This does not appear to be an absolute path pointing
+to a location in your home directory. Skipping.
+    +++++++++
+Path /data/home/alguire/inout_files/python has size 3809280.
+Path /data/home/alguire/bin has size 1675264.
+Total size of paths = 5484544 bytes
+******* backup complete on 2015-03-16 12:21:39 *******
+Elapsed time: 0.208173 seconds.
+********************************************************

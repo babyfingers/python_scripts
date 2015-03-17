@@ -22,6 +22,7 @@ def readfile(filename):
 
 tmpfile = "dirsize.tmp"
 duSize_re = re.compile("([0-9]+)\W+total")
+script_path = os.getcwd()
 
 def getSizeOnDisk(path):
     #Return size (on disk) of the item at path in bytes
@@ -38,7 +39,7 @@ def writeList(write_string, write_to):
     has_error = False
     in_type = type(write_to)
     if (in_type is file):
-        files.write(write_string)
+        write_to.write(write_string)
     elif (write_to=="PRINT"):
         print write_string
     elif (in_type is tuple or in_type is list):
@@ -98,68 +99,48 @@ def backup_paths(paths,username):
         print command
         os.system(command)
 
-def openLogFile(filePath,write_out):
+def openFile(filePath,write_out,willWrite):
     #Check if there is a log file at the chosen path.
     #If there is a log file, append at the end. If
     #there is not, create one. Otherwise, throw an
     #error.
-    log_exists = os.path.exists(filePath)
-    log_is_file = os.path.isfile(filePath)
-    if (log_exists and log_is_file):
-        logFile = open(filePath,"a")
-        logFile.seek(0,2)
-    elif(log_exists and not log_is_file):
-        writeList("Error! Something exists at {} and it is not a file.".format(filePath),write_out)
-        writeList("Please move it so the log file can be written.\n",write_out)
+    file_exists = os.path.exists(filePath)
+    file_is_file = os.path.isfile(filePath)
+    if (file_exists and file_is_file):
+        if (willWrite):
+            outFile = open(filePath,"a")
+            outFile.seek(0,2)
+        else:
+            outFile = open(filePath,"r")
+    elif(file_exists and not file_is_file):
+        writeList("Error! Something exists at {} and it is not a file.\n".format(filePath),write_out)
         return "NOT_A_FILE"
-    elif(not log_exists):
-        logFile = open(filePath,"w")
-    return logFile
+    elif(not file_exists):
+        if (willWrite):
+            outFile = open(filePath,"w")
+        else:
+            return "NOT_A_FILE"
+    return outFile
 
 # Set up log files
 os.chdir("/data/home/")
 t0 = dt.now()
-mainLogPath = "/data/home/alguire/inout_files/python/main_backup_log_{}-{}-{}.txt".format(t0.year,t0.month,t0.day)
-mainLogFile = openLogFile(mainLogPath,"PRINT")
+mainLogPath = os.path.join(script_path,"main_backup_log_{}-{}-{}.txt".format(t0.year,t0.month,t0.day))
+
+mainLogFile = openFile(mainLogPath,"PRINT",True)
 if (mainLogFile=="NOT_A_FILE"):
     print "Error! We can't write the log file to {}"
     print "because there is some non-file in the way."
     print "This must be fixed before backup can proceed."
     sys.exit()
 
-# (start loop over users)
-#user_list = [u for u in os.listdir("/data/home/") if os.path.isdir(u)]
-user_list = ["alguire"]
-user_limits = {}
-for u in user_list:
-    user_limits[u] = 10000000
-
-for username in user_list:
-    mem_max = user_limits[username]
-    username = "alguire"
-    user_home = "/data/home/" +username
-    backup_file = user_home+"/backup_please"
-    backup_success = False
-    write_list = mainLogFile
-
-    os.chdir(user_home)
-    locLogPath = user_home +"/offsite_backup.log"
-
-    locLogFile = openLogFile(locLogPath,write_list)
-    if (locLogFile != "NOT_A_FILE"):
-        write_list = [mainLogFile,locLogFile]
-
-    t0 = dt.now()
-    writeList("********************************************************\n",write_list)
-    writeList("******* offsite_backup v{}, {}-{:02d}-{:02d} {:02d}:{:02d}:{:02d} *******\n".format(vers,t0.year,t0.month,t0.day,t0.hour,t0.minute,t0.second),write_list)
-    writeList("Maximum backup size for user {} is {} bytes.\n".format(username,mem_max))
-    writeList("Contents of {}:\n".format(backup_file),write_list)
+def do_backup(bupFilePath,write_list,username,mem_max):
+    writeList("Maximum backup size for user {} is {} bytes.\n".format(username,mem_max),write_list)
+    writeList("Contents of {}:\n".format(bupFilePath),write_list)
     writeList("--------------------------------------------------------\n",write_list)
-    writeList(readfile(backup_file),write_list)
+    writeList(readfile(bupFilePath),write_list)
     writeList("--------------------------------------------------------\n",write_list)
-
-    paths = getPaths(backup_file,username,write_list)
-
+    paths = getPaths(bupFilePath,username,write_list)
     mem_total = 0
     for path in paths:
         pathSize = getSizeOnDisk(path)
@@ -172,16 +153,67 @@ for username in user_list:
     else:
         backup_paths(paths,username)
         result_str = "complete"
+    return result_str
 
+# (start loop over users)
+#user_list = [u for u in os.listdir("/data/home/") if os.path.isdir(u)]
+user_list = ["alguire"]
+user_limits = {}
+for u in user_list:
+    user_limits[u] = 10000000
+
+for username in user_list:
+    mem_max = user_limits[username]
+    username = "alguire"
+    user_home = "/data/home/" +username
+    bupFilePath = user_home+"/backup_please"
+    backup_success = False
+    
+    write_list = mainLogFile
+    writeList("\n\n",write_list)
+    writeList("Now working on user {}\n".format(username),write_list)
+
+    os.chdir(user_home)
+
+    #Set up local log file
+    locLogPath = user_home +"/offsite_backup.log"
+    locLogFile = openFile(locLogPath,write_list,True)
+    t0 = dt.now()
+    if (locLogFile == "NOT_A_FILE"):
+        writeList("********************************************************\n",write_list)
+        writeList("******* offsite_backup v{}, {}-{:02d}-{:02d} {:02d}:{:02d}:{:02d} *******\n".format(vers,t0.year,t0.month,t0.day,t0.hour,t0.minute,t0.second),write_list)
+        writeList("Something other than a text file is where the local log file should be.\n",write_list)
+        writeList("\t"+locLogPath,write_list)
+        writeList("Please move this file if you would like a local log of the backup.\n",write_list)
+    else:
+        write_list = [mainLogFile,locLogFile]
+        writeList("\n\n",locLogFile)
+        writeList("********************************************************\n",write_list)
+        writeList("******* offsite_backup v{}, {}-{:02d}-{:02d} {:02d}:{:02d}:{:02d} *******\n".format(vers,t0.year,t0.month,t0.day,t0.hour,t0.minute,t0.second),write_list)
+    os.system("chmod o+r "+locLogPath)
+
+    #Look for the file that will tell us what to back up
+    bupFile = openFile(bupFilePath,write_list,False)
+    if (bupFile == "NOT_A_FILE"):
+        writeList("Cannot find backup request file at \n\t{}\n".format(bupFilePath),write_list)
+        writeList("Cannot proceed with backup if request file cannot be read.\n",write_list)
+        result_str = "aborted"
+    else:
+        result_str = ""
+        bupFile.close()
+        
+    if (result_str != "aborted"):
+        result_str = do_backup(bupFilePath,write_list,username,mem_max)
     t1 = dt.now()
     writeList("******* backup {} on {}-{:02d}-{:02d} {:02d}:{:02d}:{:02d} *******\n".format(result_str,t1.year,t1.month,t1.day,t1.hour,t1.minute,t1.second),write_list)
     t10 = t1-t0
     writeList("Elapsed time: {} seconds.\n".format(t10.total_seconds()),write_list)
     writeList("********************************************************\n",write_list)
+
     if (locLogFile != "NOT_A_FILE"):
         locLogFile.close()
         write_list = mainLogFile
 
-
+mainLogFile.close()
 
 

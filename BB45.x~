@@ -1,0 +1,83 @@
+# Bi-benzene system, a test case to see if it delocalizes.
+# Two benzenes facing the same direction at pi/4  to each
+# other. (Not facing each other.) This geometry
+# will hopefully be easy to probe using fluorescence
+# anisotropy measurements. This time in a symmetric
+# configuration (no energy difference between the rings).
+# Closest two atoms: separated by ~2.25 A.
+
+$molecule
+0 1
+C	0.00000000	0.00000000	1.38617000
+H	0.00000000	0.00000000	2.46176710
+C	1.20045850	0.00000000	0.69308500
+H	2.13195280	0.00000000	1.23088350
+C	1.20045850	0.00000000	-0.69308500
+H	2.13195280	0.00000000	-1.23088350
+C	0.00000000	0.00000000	-1.38617000
+H	0.00000000	0.00000000	-2.46176710
+C	-1.20045850	0.00000000	-0.69308500
+H	-2.13195280	0.00000000	-1.23088350
+C	-1.20045850	0.00000000	0.69308500
+H	-2.13195280	0.00000000	1.23088350
+C	6.51390560	0.98017021	0.98017021
+H	6.51390560	1.74073221	1.74073221
+C	7.71436410	0.49008510	0.49008510
+H	8.64585840	0.87036607	0.87036607
+C	7.71436410	-0.49008510	-0.49008510
+H	8.64585840	-0.87036607	-0.87036607
+C	6.51390560	-0.98017021	-0.98017021
+H	6.51390560	-1.74073221	-1.74073221
+C	5.31344710	-0.49008510	-0.49008510
+H	4.38195280	-0.87036607	-0.87036607
+C	5.31344710	0.49008510	0.49008510
+H	4.38195280	0.87036607	0.87036607
+$end
+
+$rem
+jobtype             	sp
+exchange	    	hf
+basis           	6-31G*
+cis_n_roots		6
+max_scf_cycles       	600
+max_cis_cycles		50
+scf_algorithm        	diis
+rpa             	false
+mem_static 		750
+mem_total 		5000
+symmetry        	false
+sym_ignore 		true
+unrestricted            false
+cis_singlets		true
+cis_triplets		false
+spin_flip		false
+ercis_eps            	eeppss
+ercis_temp           	TTmmpp
+tia_order            	tttooo
+er_cis_numstate      	2
+cis_loc_state1       	1
+cis_loc_state2       	2
+$end
+
+
+
+$comment
+scf_guess               gwh #These commands are necessary for
+scf_guess_mix           10  # unrestricted calculations.
+
+boys_cis_ov_separate 	false
+boys_cis_numstate    	4
+cis_loc_state1       	1
+cis_loc_state2       	2
+cis_loc_state3       	3
+cis_loc_state4       	4
+IANLTY               	200  #These two commands are necessary for
+make_cube_files      	true # plotting.
+
+
+$comment
+molden_format 	        true
+print_general_basis 	true
+print_orbitals 		15
+
+

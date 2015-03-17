@@ -5,6 +5,7 @@
 import re
 import os
 import sys
+import time
 
 def readfile(filename):
     f = open(filename,"r")
@@ -23,8 +24,8 @@ def getSizeOnDisk(path):
     l = duSize_re.findall(fs)
     return int(l[0])*1024
 
-target = raw_input("What directory would you like the size of?\n")
-print "size = {} bytes".format(getSizeOnDisk(target))
+#target = raw_input("What directory would you like the size of?\n")
+#print "size = {} bytes".format(getSizeOnDisk(target))
 
 def getPaths(pathfile,user):
     pathList = []
@@ -58,7 +59,11 @@ def getPaths(pathfile,user):
     return pathList
 
 pathfile = "/data/home/alguire/pathfile.txt"
-print getPaths(pathfile,"alguire")
-
-
+paths = getPaths(pathfile,"alguire")
+total = 0
+for path in paths:
+    pathSize = getSizeOnDisk(path)
+    total += pathSize
+    print "Path {} has size {}.".format(path,pathSize)
+print "Total size of paths = {}".format(total)
 

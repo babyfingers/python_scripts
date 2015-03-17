@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python2.7
 
 import string
 import os.path
@@ -13,18 +13,24 @@ import qchem as qc
 import random
 from datetime import datetime
 
-#fileName = "benzene-freq-631Gs-parallel-cq.out02"
-#fileName = "B1A1c2_Toluene-omegaB97XD.out01"
-#fileName = "BT1_trans_C2_Toluene.x"
-fileName = "emimTf2N.x"
-versionString = "0.3"
+fileName = raw_input("File that contains geometry data:\n")
+print "Enter the indices of the atoms you wish to move to x=0, separated by spaces,"
+atomString = raw_input("e.g. \"0 1 2 3 4\":\n")
+atomList = [int(s) for s in atomString.split()]
+#atomList = [int(s) for s in atomList]
+atomList = np.array(atomList)
 
+versionString = "0.4"
+
+# Version notes: 0.4
+# This is a more user-friendly version that does not require
+# the script to be changed every time it is run.
 # Version notes: 0.3
 # This code now accomodates for the selected atoms to be
 # put into different planes (rather than just the yz
 # plane as in previous versions).
 
-# Rotate.py: put this stupid molecule
+# Rotate.py: put this molecule
 # in the yz plane
 
 logFile = open("rotate.log","w")
@@ -100,13 +106,13 @@ def getXscore(myGeometry,atomList):
     return la.norm(np.array(Xarray))
 
 #If we can get this list of atoms in the yz plane, we'll be all set.
-atomList = np.array([0,1,2,3,4,5,6])
+#atomList = np.array([0,1,2,3,4,5,6])
 #atomList = np.array([35,36,37,38,39])
 #atomList = np.array([10,11,12,13,14,15])
 #atomList = np.array([8,9,10,11,12,13])
 # When we do rotations, which cartesian coordinate
 # should be sent to zero?
-cartesianCoordToZero = 2 # 0 for x
+cartesianCoordToZero = 0 # 0 for x
                          # 1 for y
                          # 2 for z
 otherCoords = [0,1,2]
@@ -141,6 +147,7 @@ while(stillRotating):
     else:
         NConsecutiveConvergences = 0
 
+print "******** Rotated geometry: ***********"
 print qc.geometryToString(elements,geometry)
 
 logFile.write("Script completed.\n")
