@@ -122,7 +122,7 @@ def openFile(filePath,write_out,willWrite):
 # Set up log files
 os.chdir("/data/home/")
 tm0 = dt.now()
-mainLogPath = os.path.join(script_path,"main_backup_log_{}-{}-{}.txt".format(tm0.year,tm0.month,tm0.day))
+mainLogPath = os.path.join(script_path,"main_backup_log_{:04d}-{:02d}-{:02d}.txt".format(tm0.year,tm0.month,tm0.day))
 
 mainLogFile = openFile(mainLogPath,"PRINT",True)
 if (mainLogFile=="NOT_A_FILE"):
@@ -132,7 +132,7 @@ if (mainLogFile=="NOT_A_FILE"):
     sys.exit()
 
 writeList("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n",mainLogFile)
-writeList("~~~~~~~ STARTING BACKUP LOOP, v{} {:02d}-{:02d} {:02d}:{:02d}:{:02d} ~~~~~~~~\n".format(vers,tm0.year,tm0.month,tm0.day,tm0.hour,tm0.minute,tm0.second),mainLogFile)
+writeList("~~~~~~~ STARTING BACKUP LOOP v{}, {:04d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d} ~~~~~~~~\n".format(vers,tm0.year,tm0.month,tm0.day,tm0.hour,tm0.minute,tm0.second),mainLogFile)
 
 def do_backup(bupFilePath,write_list,username,mem_max):
     writeList("Maximum backup size for user {} is {} bytes.\n".format(username,mem_max),write_list)
